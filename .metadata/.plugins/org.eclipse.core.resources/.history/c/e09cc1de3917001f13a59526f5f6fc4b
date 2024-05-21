@@ -1,0 +1,24 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri = "http://java.sun.com/jsp/jstl/functions"%>
+<c:set var="path3" value="${pageContext.request.contextPath }" />
+<!-- 푸터 내용 기술 -->
+    <div class="container is-fullhd">
+    	<nav class="ft-wrap container">
+    		<ul class="menu">
+    			<li><a href="${path3 }/member/privacy.do">개인정보취급방침</a></li>
+    			<li><a href="${path3 }/member/term2.do">이용약관</a></li>
+    			<li><a href="${path3 }/member/storeFind.do">매장찾기</a></li>
+    			<li><a href="${path3 }/member/recruit.do">인재채용</a></li>
+    		</ul>
+    	</nav>
+        <div class="content has-text-centered">
+            <p>
+				<span class="ft_col">법인명 : (주)모닝글로리</span> <span class="ft_col">대표자 : 한동인,송익현</span> <span class="ft_col">사업자등록번호안내: 105-81-63968</span> <span class="ft_col">통신판매업신고번호 제2015-화성향남-0089호</span><br>
+				<span class="ft_col">대표전화 : 02-724-0410</span> <span class="ft_col">팩스 : 02-2140-0141</span> <span class="ft_col">본사주소 : 경기도 화성시 향남읍 장안로 76-41</span><br>
+				<span class="ft_col">개인정보관리책임자: <strong>관리자(admin@morningoffice.co.kr)</strong></span><br>
+				<span class="ft_col">Copryight (C) 2024 Morning Office. All Rights Reserved.</span>
+            </p>
+        </div>
+    </div>
