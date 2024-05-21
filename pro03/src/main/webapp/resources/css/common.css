@@ -49,6 +49,19 @@ font-family: "Bai Jamjuree", sans-serif;
 }
 
 
+.logo-wrap {
+	width: 200px;
+	height:auto;	
+}
+
+.logo {
+	display:block;
+	width: 200px;
+	height: auto;
+}
+
+
+
 #ft {
 	padding-top:3px; 
 	padding-bottom:30px; 

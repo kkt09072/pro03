@@ -8,8 +8,8 @@
 <!-- 헤더 내용 기술 -->
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <a class="navbar-item" href="${path1 }">
-                <img src="${path1}/resources/images/logo01.svg">
+            <a class="navbar-item" href="${path1 }" class="logo-wrap">
+                <img src="${path1}/resources/images/logo01.svg" alt="LOGO" class="logo">
             </a>
 
             <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
