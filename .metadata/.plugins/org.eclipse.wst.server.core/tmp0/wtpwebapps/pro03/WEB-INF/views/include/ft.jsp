@@ -17,7 +17,7 @@
         <div class="footer container clr-fix">
             <p class="copyright">
 				<span class="ft_col">법인명 : (주)모닝오피스</span> <span class="ft_col">대표자 : 김기태</span> 
-				<span class="ft_col">사업자등록번호안내: 105-81-63968</span> 
+				<span class="ft_col">사업자등록번호안내: 105-87-63954</span> 
 				<span class="ft_col">통신판매업신고번호 제2020-화성향남-0192호</span>
 				<span class="ft_col">대표전화 : 02-724-0410</span> 
 				<span class="ft_col">팩스 : 02-2140-0141</span> 
