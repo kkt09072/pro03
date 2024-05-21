@@ -13,18 +13,22 @@
     <jsp:include page="./include/head.jsp"></jsp:include>
 </head>
 <body>
-<div class="container is-fullhd">
+<div class="full-wrap">
 	<header id="hd" class="header">
-		<jsp:include page="./include/hd.jsp"></jsp:include>
+    	<div class="container">
+			<jsp:include page="./include/hd.jsp"></jsp:include>
+		</div>
 	</header>
-	<main class="contents">
-		<h1>
-			Hello world!  
-		</h1>
-		
-		<P>  The time on the server is ${serverTime}. </P>	
+	<main class="contents" id="contents">
+		<section class="page clr-fix" id="page1">
+			<div class="page-wrap">
+				<h2 class="page-title">Hello world!</h2>
+				
+				<P>  The time on the server is ${serverTime}. </P>
+			</div>
+		</section>	
 	</main>
-	<footer id="ft" class="footer">
+	<footer id="ft">
 		<jsp:include page="./include/ft.jsp"></jsp:include>
 	</footer>
 </div>

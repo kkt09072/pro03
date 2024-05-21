@@ -2,7 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<!DOCTYPE>
+<c:set var="path2" value="${pageContext.servletContext.contextPath }" />
+<!DOCTYPE html>
 <html lang="ko">
 <head>
 	<meta charset="UTF-8">
@@ -12,16 +13,23 @@
 	<jsp:include page="../include/head.jsp"></jsp:include>
 </head>
 <body>
-<div class="container">
+<div class="full-wrap">
     <!-- 헤더 부분 인클루드 -->
-    <header id="hd" class="container is-fullhd">
-    	<jsp:include page="../include/hd.jsp"></jsp:include>
+    <header id="hd">
+    	<div class="container">
+    		<jsp:include page="../include/hd.jsp"></jsp:include>
+    	</div>
     </header>
-    <main class="contents">
-    	
+    <main id="contents" class="contents">
+ 	    <section class="page" id="page1">
+    		<h2 class="page-title"></h2>
+    		<div class="page-wrap">
+    		
+    		</div>
+    	</section>
     </main>
     <!-- 푸터 부분 인클루드 -->
-    <footer class="footer" id="ft">
+    <footer id="ft">
     	<jsp:include page="../include/ft.jsp"></jsp:include>
     </footer>
 </div>    
