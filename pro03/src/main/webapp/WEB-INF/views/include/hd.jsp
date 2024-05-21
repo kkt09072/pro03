@@ -12,14 +12,14 @@
                 <img src="${path1}/resources/images/logo01.svg" alt="LOGO" class="logo">
             </a>
 
-            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <button class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
-            </a>
+            </button>
         </div>
 
-        <div id="navbarBasicExample" class="navbar-menu">
+        <div id="navbarBasicExample" class="navbar-menu" role="menu">
             <div class="navbar-start">
             	<div class="navbar-item has-dropdown is-hoverable">
                 	<a href="${path1 }/intro/intro1.do" class="navbar-link">
@@ -139,3 +139,19 @@
             </div>
         </div>
     </nav>
+    <script>
+	document.addEventListener('DOMContentLoaded', () => {
+	    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+	
+	    if ($navbarBurgers.length > 0) {
+	        $navbarBurgers.forEach(el => {
+	            el.addEventListener('click', () => {
+	                const target = el.dataset.target;
+	                const $target = document.getElementById(target);
+	                el.classList.toggle('is-active');
+	                $target.classList.toggle('is-active');
+	            });
+	        });
+	    }
+	});
+	</script>
