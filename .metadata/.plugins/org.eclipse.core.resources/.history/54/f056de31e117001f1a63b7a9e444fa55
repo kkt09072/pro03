@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sales">
+
+	<resultMap type="sales" id="salesRM">
+		<result property="member.id" column="id"/>
+		<result property="product.pno" column="pno"/>
+	</resultMap>
+
+	<select id="getSalesList" resultMap="salesRM">
+		select * from sales where id=#{member.id} order by resdate desc
+	</select>	
+	
+	<select id="getSales" resultType="com.morning.domain.Sales">
+		select * from sales where sno=#{sno}
+	</select>
+	
+	<insert id="insSales" parameterType="com.morning.domain.Sales">
+		insert into sales values (default, #{product.pno}, #{amount}, #{tot},
+		#{member.id}, #{paymethod}, #{paynum}, #{addr}, #{tel}, 
+		#{delcom}, #{deltel}, #{delno}, #{delstatus}, #{st}, default)
+	</insert>
+	
+	<update id="upSales" parameterType="com.morning.domain.Sales">
+		update sales set addr=#{addr}, tel=#{tel} where sno=#{sno}
+	</update>
+	
+	<update id="upDelivery" parameterType="com.morning.domain.Sales">
+		update sales set delcom=#{delcom}, deltel=#{deltel}, delstatus=#{delstatus}, st=#{st} where sno=#{sno}
+	</update>
+	
+	<delete id="delSales">
+		delete from sales where sno=#{sno}
+	</delete>
+</mapper>

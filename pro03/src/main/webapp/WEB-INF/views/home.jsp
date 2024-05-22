@@ -22,9 +22,7 @@
 	<main class="contents" id="contents">
 		<section class="page clr-fix" id="page1">
 			<div class="page-wrap">
-				<h2 class="page-title">Hello world!</h2>
 				
-				<P>  The time on the server is ${serverTime}. </P>
 			</div>
 		</section>	
 	</main>

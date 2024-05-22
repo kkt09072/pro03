@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basket">
+
+	<!-- 총 장바구니 수 -->
+	<select id="getTotalCount" resultType="int">
+		select COUNT(*) from basket
+	</select>
+
+	<!-- has a 관계 설정 -->
+	<resultMap type="basket" id="basketRM">
+		<result property="member.id" column="id"/>
+		<result property="product.pno" column="pno"/>
+	</resultMap>
+
+	<!-- 사용자별 장바구니 목록 -->
+	<select id="getBasketList" resultMap="basketRM">
+		select b.bno, m.id, p.pno, b.amount, b.remark, b.resdate 
+		from basket b, product p, member m where b.pno=p.pno and b.id=m.id and id=#{member.id}  
+		order by resdate desc
+	</select>	
+	
+	<!-- 장바구니 상세보기 -->
+	<select id="getBasket" resultMap="basketRM">
+		select b.bno, m.id, p.pno, b.amount, b.remark, b.resdate 
+		from basket b, product p, member m where b.pno=p.pno and b.id=m.id and bno=#{bno}
+	</select>
+	
+	<!-- 장바구니에 추가 -->
+	<insert id="insBasket" parameterType="com.morning.domain.Basket">
+		insert into basket values (default, #{member.id}, #{product.pno}, #{amount}, '', default);
+	</insert>
+	
+	<!-- 장바구니 정보 변경 -->
+	<update id="upBasket" parameterType="com.morning.domain.Basket">
+		update basket set amount=#{amount}, remark=#{remark} where bno=#{bno}
+	</update>
+	
+	<!-- 장바구니 정보 제거 -->
+	<delete id="delBasket">
+		delete from basket where bno=#{bno}
+	</delete>
+</mapper>

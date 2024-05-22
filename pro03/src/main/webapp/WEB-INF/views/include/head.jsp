@@ -20,12 +20,12 @@
 <link rel="stylesheet" href="${path0}/resources/css/bulma.css">
 <link rel="stylesheet" href="${path0}/resources/css/xeicon.css">
 <link rel="stylesheet" href="${path0}/resources/css/datatables.min.css">
-<link rel="stylesheet" href="${path0}/resources/css/swiper.css">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 <link rel="stylesheet" href="${path0}/resources/css/common.css" />
 <script src="${path0}/resources/js/jquery-3.7.1.js"></script>
 <script src="${path0}/resources/js/datatables.min.js"></script>
 <script src="${path0}/resources/js/parallax.js"></script>
-<script src="${path0}/resources/js/swiper.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <style>
 /* 공통 사용자 정의 스타일 */
 #ft { border-top:3px solid #369; }

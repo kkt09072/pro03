@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="free">
+
+	<resultMap type="free" id="freeRM">
+		<result property="member.id" column="id"/>
+		<result property="member.name" column="name"/>
+	</resultMap>
+	
+	<select id="getFreeList" parameterType="pagingBean" resultMap="freeRM">
+		select * from free where order by resdate desc
+	</select>	
+	
+	<select id="getFree" resultType="com.morning.domain.Basket">
+		select * from free where no=#{no}
+	</select>
+	
+	<insert id="insFree" parameterType="com.morning.domain.Basket">
+		insert into free values (default, #{title}, #{content}, default, default, #{member.id}, #{member.name})
+	</insert>
+	
+	<update id="upFree" parameterType="com.morning.domain.Basket">
+		update free set title=#{title}, content=#{content} where no=#{no}
+	</update>
+
+	<update id="hitCount">
+		update free set hits=hits+1 where no=#{no}
+	</update>
+	
+	<delete id="delFree">
+		delete from free where no=#{no}
+	</delete>
+</mapper>
