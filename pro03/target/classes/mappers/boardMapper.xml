@@ -15,7 +15,7 @@
 	</select>
 	
 	<!-- 공지사항 상세 보기 -->	
-	<select id="getBoard" resultType="com.morning.domain.Board">
+	<select id="getBoard" parameterType="int" resultType="com.morning.domain.Board">
 		select * from board where bno=#{bno}
 	</select>
 	
@@ -31,12 +31,12 @@
 	</update>
 	
 	<!-- 공지사항 조회수 증가 -->
-	<update id="vcntCount">
+	<update id="vcntCount" parameterType="int">
 		update board set vcnt=vcnt+1 where bno=#{bno}
 	</update>
 	
 	<!-- 공지사항 삭제 -->
-	<delete id="delBoard">
+	<delete id="delBoard" parameterType="int">
 		delete from board where bno=#{bno}
 	</delete>
 </mapper>

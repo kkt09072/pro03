@@ -14,6 +14,6 @@ public class Fileboard {
 	private String url;
 	private int hits;
 	private String resdate;
-	private Member member;
+	private String author;
 }
 

@@ -84,6 +84,31 @@ font-family: "Bai Jamjuree", sans-serif;
 	padding-bottom: 0.8em;
 }
 
+#tb1 {
+	clear:both;
+	margin:0 auto;
+	margin-top:20px; 
+	width:1200px;
+}
+
+.table td, .table th {
+	background-color:transparent;	
+}
+
+#tb1_length, #tb1_filter {
+	margin-bottom:16px;
+}
+
+.table.dataTable.no-footer {
+	clear:both;
+	margin-top:16px;
+}
+
+#breadcrumb {
+	height:60px;
+	line-height:60px;
+}
+
 #page1 {
 	background-color: #eee;
 }
