@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.morning.domain.Board;
 import com.morning.per.BoardMapper;
@@ -24,8 +25,15 @@ public class BoardService implements BoardBiz {
 		return boardDAO.getBoardList();
 	}
 
+	@Transactional
 	@Override
 	public Board getBoard(int bno) {
+		boardDAO.vcntCount(bno);
+		return boardDAO.getBoard(bno);
+	}
+	
+	@Override
+	public Board selBoard(int bno) {
 		return boardDAO.getBoard(bno);
 	}
 
@@ -40,7 +48,7 @@ public class BoardService implements BoardBiz {
 	}
 
 	@Override
-	public void vcntCount(int bno) {
+	public void countUpCnt(int bno) {
 		boardDAO.vcntCount(bno);		
 	}
 

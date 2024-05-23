@@ -1,0 +1,17 @@
+127.0.0.1 - - [23/May/2024:12:03:47 +0900] "GET / HTTP/1.1" 404 807
+0:0:0:0:0:0:0:1 - - [23/May/2024:12:03:47 +0900] "GET /myapp/ HTTP/1.1" 200 10075
+0:0:0:0:0:0:0:1 - - [23/May/2024:12:03:48 +0900] "GET /myapp/resources/js/jquery-3.7.1.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [23/May/2024:12:03:48 +0900] "GET /myapp/resources/css/datatables.min.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [23/May/2024:12:03:48 +0900] "GET /myapp/resources/css/xeicon.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [23/May/2024:12:03:48 +0900] "GET /myapp/resources/css/normalize.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [23/May/2024:12:03:48 +0900] "GET /myapp/resources/css/bulma.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [23/May/2024:12:03:48 +0900] "GET /myapp/resources/js/datatables.min.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [23/May/2024:12:03:48 +0900] "GET /myapp/resources/js/parallax.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [23/May/2024:12:03:48 +0900] "GET /myapp/resources/images/logo01.svg HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [23/May/2024:12:03:48 +0900] "GET /myapp/resources/css/common.css HTTP/1.1" 200 3269
+0:0:0:0:0:0:0:1 - - [23/May/2024:12:03:58 +0900] "GET /myapp/board/list.do HTTP/1.1" 200 13177
+0:0:0:0:0:0:0:1 - - [23/May/2024:12:03:58 +0900] "GET /DataTables-1.11.3/images/sort_both.png HTTP/1.1" 404 853
+0:0:0:0:0:0:0:1 - - [23/May/2024:12:03:58 +0900] "GET /DataTables-1.11.3/images/sort_desc.png HTTP/1.1" 404 853
+0:0:0:0:0:0:0:1 - - [23/May/2024:12:03:59 +0900] "GET /myapp/board/detail.do?bno=6 HTTP/1.1" 200 11542
+0:0:0:0:0:0:0:1 - - [23/May/2024:12:04:05 +0900] "GET /myapp/board/list.do HTTP/1.1" 200 13177
+0:0:0:0:0:0:0:1 - - [23/May/2024:12:04:45 +0900] "GET /myapp/board/detail.do?bno=6 HTTP/1.1" 200 11542
