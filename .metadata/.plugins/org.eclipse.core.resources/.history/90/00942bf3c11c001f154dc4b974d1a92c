@@ -1,0 +1,60 @@
+package com.morning.per;
+
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.morning.domain.Fileboard;
+import com.morning.util.PagingBean;
+
+@Repository
+public class FileboardDAO implements FileboardMapper {
+
+	@Autowired
+	private SqlSession sqlSession;
+	
+	@Override
+	public int getTotalCount() {
+		return sqlSession.selectOne("fileboard.getTotalCount");
+	}
+
+	@Override
+	public List<Fileboard> getFileboardList(PagingBean pagingBean) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Fileboard getFileboard(int no) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insFileboard(Fileboard board) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void upFileboard(Fileboard board) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void hitCount(int no) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delFileboard(int no) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+}

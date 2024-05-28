@@ -1,0 +1,6 @@
+package com.morning.per;
+
+public class FileboardDAO implements FileMapper {
+	
+	
+}

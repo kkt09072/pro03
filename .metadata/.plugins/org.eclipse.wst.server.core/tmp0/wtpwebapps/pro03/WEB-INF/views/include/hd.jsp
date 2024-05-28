@@ -94,14 +94,9 @@
                         <a href="${path1 }/free/list.do" class="navbar-item">
                             Free
                         </a>
-                        <a href="${path1 }/file/filelist1.do" class="navbar-item">
-                            Fileboard
+                        <a href="${path1 }/fileboard/list.do?pageNo=1" class="navbar-item">
+                            Dataroom
                         </a>
-                        <c:if test="${sid.equals('admin')}">
-                        <a href="${path1 }/file/fileupload1.do" class="navbar-item">
-                            FileUpload
-                        </a>
-                        </c:if>
                         <hr class="navbar-divider">
                         <a href="${path1 }/service/online.do" class="navbar-item">
                             Contact

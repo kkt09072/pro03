@@ -1,0 +1,5 @@
+package com.morning.domain;
+
+public class FileboardListVO {
+
+}

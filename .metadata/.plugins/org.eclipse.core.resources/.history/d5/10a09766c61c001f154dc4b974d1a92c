@@ -1,0 +1,21 @@
+package com.morning.domain;
+
+import java.util.List;
+
+import com.morning.util.PagingBean;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+public class FileboardListVO {
+	private List<Fileboard> list;
+	private PagingBean pagingBean;
+}

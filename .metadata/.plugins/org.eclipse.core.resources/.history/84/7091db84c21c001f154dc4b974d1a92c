@@ -1,0 +1,50 @@
+package com.morning.biz;
+
+import com.morning.domain.Fileboard;
+import com.morning.domain.FileboardListVO;
+
+public class FileboardServiceImpl implements FileboardService {
+
+	@Override
+	public FileboardListVO getPostList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public FileboardListVO getPostList(String pageNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void write(Fileboard fileboard) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Fileboard getPostDetailNoHits(int no) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateHits(int no) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deletePost(int no) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updatePost(Fileboard fileboard) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+}

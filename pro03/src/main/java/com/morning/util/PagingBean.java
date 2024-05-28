@@ -21,12 +21,14 @@ public class PagingBean {
 	/**
 	 * 페이지 그룹당 페이지수
 	 */
-	private int pageNumberPerPageGroup = 4;
+	private int pageNumberPerPageGroup = 5;
 	/**
 	 * database에 저장된 총게시물수
 	 */
 	private int totalContents;
-
+	
+	private int startRowNumber;
+	
 	public PagingBean() {
 	}
 
@@ -37,6 +39,7 @@ public class PagingBean {
 	public PagingBean(int totalContents, int nowPage) {
 		this.totalContents = totalContents;
 		this.nowPage = nowPage;
+		this.setStartRowNumber();
 	}
 
 	public int getNowPage() {
@@ -49,10 +52,14 @@ public class PagingBean {
 	 * 
 	 * @return
 	 */
+	public void setStartRowNumber() {
+		startRowNumber = ((nowPage - 1) * contentNumberPerPage) + 1;
+	}
+
 	public int getStartRowNumber() {
 		return ((nowPage - 1) * contentNumberPerPage) + 1;
 	}
-
+	
 	/**
 	 * 현재 페이지에서 보여줄 게시물 행(row)의 마지막 번호
 	 * 현재페이지*contentNumberPerPage 만약 총게시물수보다<br>

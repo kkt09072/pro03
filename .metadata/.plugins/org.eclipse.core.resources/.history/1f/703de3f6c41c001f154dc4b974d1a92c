@@ -1,0 +1,60 @@
+package com.morning.biz;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.morning.domain.Fileboard;
+import com.morning.domain.FileboardListVO;
+import com.morning.per.FileboardMapper;
+import com.morning.util.PagingBean;
+
+@Service
+public class FileboardServiceImpl implements FileboardService {
+
+	@Autowired
+	private FileboardMapper fileboardDAO;
+	
+	@Override
+	public List<Fileboard> getPostList() {
+		List<Fileboard> fileboardList = fileboardDAO.getFileboardListAll();
+		return fileboardList;
+	}
+
+	@Override
+	public List<Fileboard> getPostList(String pageNo) {
+		return null;
+	}
+
+	@Override
+	public void write(Fileboard fileboard) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Fileboard getPostDetailNoHits(int no) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateHits(int no) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deletePost(int no) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updatePost(Fileboard fileboard) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+}
