@@ -70,8 +70,8 @@
 					<div class="buttons">
 					  <c:if test="${cus.id.equals('admin') }">
 					  <a href="${path2 }/fileboard/insert.do" class="button is-danger">글 등록</a>
-					  <a href="${path2 }/fileboard/update.do?no=${board.no }" class="button is-warning">글 수정</a>
-					  <a href="${path2 }/fileboard/delBoard.do?no=${board.no }" class="button is-danger is-dark">글 삭제</a>
+					  <a href="${path2 }/fileboard/update.do?no=${board.no }&pageNo=${pageNo}" class="button is-warning">글 수정</a>
+					  <a href="${path2 }/fileboard/delBoard.do?no=${board.no }&pageNo=${pageNo}" class="button is-danger is-dark">글 삭제</a>
 					  </c:if>
 					  <a href="${path2 }/fileboard/list.do?pageNo=${pageNo}" class="button is-primary">글 목록</a>
 					</div>

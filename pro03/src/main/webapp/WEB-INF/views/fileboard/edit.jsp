@@ -72,6 +72,7 @@
 									<th><label for="visited">읽은 횟수</label></th>
 									<td>
 										<input type="text" name="visited" id="visited" class="input" value="${board.hits }" disabled>
+										<input type="hidden" value="${pageNo }" name="pageNo" />
 									</td>
 								</tr>
 							</tbody>

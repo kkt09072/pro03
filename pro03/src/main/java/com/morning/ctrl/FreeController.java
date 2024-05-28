@@ -7,11 +7,14 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.UUID;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.maven.shared.utils.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,12 +36,16 @@ import com.morning.domain.Free;
 @RequestMapping("/free/")
 public class FreeController {
 
+	private static final Logger log = LoggerFactory.getLogger(FreeController.class);
+	
 	@Autowired
 	private FreeBiz freeService;
 	
 	@Autowired
 	private MemberService memberService;
 	
+	@Autowired
+	private HttpSession session;
 	
 	@RequestMapping("list.do")
 	public String getFreeList(Model model) {
@@ -47,8 +54,43 @@ public class FreeController {
 	}
 	
 	@RequestMapping("detail.do")
-	public String getFree(@RequestParam("no") int no, Model model) {
-		model.addAttribute("free", freeService.getFree(no));
+	public String getFree(@RequestParam("no") int no, HttpServletRequest req, HttpServletResponse res, Model model) {
+		
+		String id = (String) session.getAttribute("sid");
+		
+		Cookie viewCookie = null;
+		Cookie[] cookies = req.getCookies();
+		
+		if(cookies !=null) {
+			for (int i = 0; i < cookies.length; i++) {
+				if(cookies[i].getName().equals("|"+id+"free"+no+"|")) {
+					log.info("쿠키 이름 : "+cookies[i].getName());
+					viewCookie=cookies[i];
+				}	
+			}
+		} else {
+			log.info("아직 방문한 적이 없습니다.");
+		}
+		
+		if(viewCookie==null) {
+            try {
+            	//쿠키 생성
+				Cookie newCookie=new Cookie("|"+id+"free"+no+"|","readCount");
+				res.addCookie(newCookie);
+                //쿠키가 없으니 증가 로직 진행
+				model.addAttribute("free", freeService.getFree(no));	
+			} catch (Exception e) {
+				log.info("쿠키 확인 불가 : "+e.getMessage());
+				e.getStackTrace();
+			}
+        //만들어진 쿠키가 있으면 증가로직 진행하지 않음
+		} else {
+			model.addAttribute("free", freeService.getNoCountFree(no));
+			log.info("viewCookie 확인 로직 : 쿠키 있음");
+			String value=viewCookie.getValue();
+			log.info("viewCookie 확인 로직 : 쿠키 value : "+value);
+		}
+		
 		return "free/get";
 	}
 
@@ -68,8 +110,43 @@ public class FreeController {
 	}
 
 	@GetMapping("update.do")
-	public String upFree(@RequestParam("no") int no, Model model) {
-		model.addAttribute("free", freeService.getFree(no));
+	public String upFree(@RequestParam("no") int no, HttpServletRequest req, HttpServletResponse res,Model model) {
+		
+		String id = (String) session.getAttribute("sid");
+		
+		Cookie viewCookie = null;
+		Cookie[] cookies = req.getCookies();
+		
+		if(cookies !=null) {
+			for (int i = 0; i < cookies.length; i++) {
+				if(cookies[i].getName().equals("|"+id+"free"+no+"|")) {
+					log.info("쿠키 이름 : "+cookies[i].getName());
+					viewCookie=cookies[i];
+				}	
+			}
+		} else {
+			log.info("아직 방문한 적이 없습니다.");
+		}
+		
+		if(viewCookie==null) {
+            try {
+            	//쿠키 생성
+				Cookie newCookie=new Cookie("|"+id+"free"+no+"|","readCount");
+				res.addCookie(newCookie);
+                //쿠키가 없으니 증가 로직 진행
+				model.addAttribute("free", freeService.getFree(no));	
+			} catch (Exception e) {
+				log.info("쿠키 확인 불가 : "+e.getMessage());
+				e.getStackTrace();
+			}
+        //만들어진 쿠키가 있으면 증가로직 진행하지 않음
+		} else {
+			model.addAttribute("free", freeService.getNoCountFree(no));
+			log.info("viewCookie 확인 로직 : 쿠키 있음");
+			String value=viewCookie.getValue();
+			log.info("viewCookie 확인 로직 : 쿠키 value : "+value);
+		}
+		
 		return "free/edit";
 	}
 	

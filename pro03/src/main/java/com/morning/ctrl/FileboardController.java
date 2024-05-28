@@ -159,8 +159,45 @@ public class FileboardController {
 	}
 
 	@GetMapping("update.do")
-	public String upBoard(@RequestParam("no") int no, Model model) {
-		model.addAttribute("board", fileboardService.getPostDetailNoHits(no));
+	public String upBoard(@RequestParam("no") int no, @RequestParam("pageNo") String pageNo, HttpServletRequest req, HttpServletResponse res, Model model) {
+		
+		String id = (String) session.getAttribute("sid");
+		
+		Cookie viewCookie = null;
+		Cookie[] cookies = req.getCookies();
+		
+		if(cookies !=null) {
+			for (int i = 0; i < cookies.length; i++) {
+				if(cookies[i].getName().equals("|"+id+"fileboard"+no+"|")) {
+					log.info("쿠키 이름 : "+cookies[i].getName());
+					viewCookie=cookies[i];
+				}	
+			}
+		} else {
+			log.info("아직 방문한 적이 없습니다.");
+		}
+		
+		if(viewCookie==null) {
+            try {
+            	//쿠키 생성
+				Cookie newCookie=new Cookie("|"+id+"fileboard"+no+"|","readCount");
+				res.addCookie(newCookie);
+                //쿠키가 없으니 증가 로직 진행
+				model.addAttribute("board", fileboardService.getPostDetailHasHits(no));	
+			} catch (Exception e) {
+				log.info("쿠키 확인 불가 : "+e.getMessage());
+				e.getStackTrace();
+			}
+        //만들어진 쿠키가 있으면 증가로직 진행하지 않음
+		} else {
+			model.addAttribute("board", fileboardService.getPostDetailNoHits(no));
+			log.info("viewCookie 확인 로직 : 쿠키 있음");
+			String value=viewCookie.getValue();
+			log.info("viewCookie 확인 로직 : 쿠키 value : "+value);
+		}
+		
+		model.addAttribute("pageNo", pageNo);
+		
 		return "fileboard/edit";
 	}
 	
@@ -168,7 +205,8 @@ public class FileboardController {
 	public String upBoardPro(@RequestParam("no") int no, 
 			@RequestParam("title") String title,
             @RequestParam("content") String content,
-            @RequestParam("file") MultipartFile file, Model model) {
+            @RequestParam("file") MultipartFile file,
+            @RequestParam("pageNo") String pageNo, Model model) {
 		
 		String author = (String) session.getAttribute("sid");
         String fileRealName = file.getOriginalFilename();
@@ -207,12 +245,12 @@ public class FileboardController {
         fileboard.setUrl(uniqueName+fileExtension);
 		
 		fileboardService.updatePost(fileboard);
-		return "redirect:list.do?pageNo=1";
+		return "redirect:list.do?pageNo="+pageNo;
 	}
 	
 	@RequestMapping("delBoard.do")
-	public String delBoard(@RequestParam("no") int no, Model model) {
+	public String delBoard(@RequestParam("no") int no, @RequestParam("pageNo") String pageNo, Model model) {
 		fileboardService.deletePost(no);
-		return "redirect:list.do?pageNo=1";
+		return "redirect:list.do?pageNo="+pageNo;
 	}
 }
