@@ -39,6 +39,18 @@
 			<version>${org.aspectj-version}</version>
 		</dependency>	
 		
+	    <dependency>
+	        <groupId>org.springframework</groupId>
+	        <artifactId>spring-aop</artifactId>
+	        <version>${org.springframework-version}</version> 
+    	</dependency>
+		
+	    <dependency>
+	        <groupId>org.aspectj</groupId>
+	        <artifactId>aspectjweaver</artifactId>
+	        <version>${org.aspectj-version}</version> 
+    	</dependency>
+		
 		<!-- Logging : 모든 자원의 접속 로그를 기록하는 라이브러리 -->
 		<dependency>
 			<groupId>org.slf4j</groupId>

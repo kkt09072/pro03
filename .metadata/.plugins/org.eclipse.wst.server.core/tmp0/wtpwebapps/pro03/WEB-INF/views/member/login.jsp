@@ -11,6 +11,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>로그인</title>
 	<jsp:include page="../include/head.jsp"></jsp:include>
+	<style>
+    .table tr td, .table tr th { padding:14px; }  
+	</style>
 </head>
 <body>
 <div class="full-wrap">
@@ -37,7 +40,7 @@
 	    		<div class="clr-fix">
 		            <form action="${path2 }/member/loginPro.do" method="post" name="loginForm">
 		                <div class="table_form_wrap">
-		                    <table class="table_form">
+		                    <table class="table">
 		                        <tbody>
 		                        <tr>
 		                            <th><label for="id">아이디</label></th>

@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -19,15 +21,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.morning.biz.MemberBiz;
+import com.morning.biz.MemberService;
 import com.morning.domain.Member;
 
 @Controller
 @RequestMapping("/member/")
 public class MemberController {
 
+	private static final Logger log = LoggerFactory.getLogger(MemberController.class);
+	
 	@Autowired
-	private MemberBiz memberService;
+	private MemberService memberService;
 	
 	@Autowired
 	private BCryptPasswordEncoder pwdEncoder;
@@ -36,10 +40,10 @@ public class MemberController {
 	private HttpSession session;	
 	
 
-	@GetMapping("agree.do")
+	@GetMapping("term.do")
 	public String agree(Model model, RedirectAttributes rttr) {
 		rttr.addAttribute("msg", "회원 약관에 동의하시기 바랍니다.");
-		return "member/agree";
+		return "member/term";
 	}
 	
 	@GetMapping("join.do")
@@ -48,20 +52,26 @@ public class MemberController {
 		return "member/join";
 	}
 
-	@PostMapping("idCheck.do")
-	public void idCheck(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
-		String id = request.getParameter("id");
+	@GetMapping("idCheck.do")
+	public void idCheck(@RequestParam("id") String id, HttpServletResponse response, Model model) throws IllegalArgumentException, IOException {
+		log.info("Controller Before id : {}", id);
+		
 		Member cus = memberService.getMember(id);
+				
+		
 		boolean result;
 		if(cus!=null) {
 			result = false;
+			log.info("Controller After id : {}", cus.getId());
 		} else {
 			result = true;
+			log.info("Controller After id : {}", "guest");
 		}
 		JSONObject json = new JSONObject();
-		json.put("result", result);
+		json.put("data", result);
 		PrintWriter out = response.getWriter();
 		out.println(json.toString());
+		
 	}
 	
 	@PostMapping("joinPro.do")
@@ -94,6 +104,9 @@ public class MemberController {
 			session.setAttribute("cus", cus);
 			session.setAttribute("sid", id);
 			session.setAttribute("spw", pw);
+			session.setAttribute("sname", cus.getName());
+			session.setAttribute("smember", cus);
+			session.setAttribute("cus", cus);
 			model.addAttribute("msg", "로그인 성공");
 			return "redirect:/";
 		} else {
@@ -109,7 +122,7 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	@GetMapping("myInfo.do")
+	@GetMapping("mypage.do")
 	public String myInfo(Model model) {
 		return "member/myInfo";
 	}
@@ -118,7 +131,6 @@ public class MemberController {
 	public String myUpdate(Model model) {
 		return "member/myUpdate";
 	}
-	
 	
 	@PostMapping("myUpdatePro.do")
 	public String myUpdatePro(HttpServletRequest request, Model model, RedirectAttributes rttr) {

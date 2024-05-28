@@ -11,6 +11,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>회원 정보</title>
 	<jsp:include page="../include/head.jsp"></jsp:include>
+	<style>
+	.table { width:900px; margin:14px auto; }
+    .table tr td, .table tr th { padding:16px; }  
+	</style>
 </head>
 <body>
 <div class="full-wrap">
@@ -35,7 +39,7 @@
     		<hr>
     		<div class="page-wrap">
 	    		<div class="clr-fix">
-	                <table class="table_form">
+	                <table class="table">
 	                    <tbody>
 		                    <tr>
 		                        <th>아이디</th>

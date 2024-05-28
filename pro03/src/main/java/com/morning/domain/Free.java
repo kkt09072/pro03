@@ -13,5 +13,6 @@ public class Free {
 	private String content;
 	private int hits;
 	private String resdate;
-	private Member member;
+	private String id;
+	private String name;
 }

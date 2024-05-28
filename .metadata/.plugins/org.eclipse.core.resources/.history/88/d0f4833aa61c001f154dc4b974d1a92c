@@ -1,0 +1,70 @@
+package com.morning.ctrl;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.morning.biz.FreeBiz;
+import com.morning.domain.Free;
+
+@Controller
+@RequestMapping("/free/")
+public class FreeController {
+
+	@Autowired
+	private FreeBiz freeService;
+	
+	@Autowired
+	private MemberBiz memberService;
+	
+	
+	@RequestMapping("list.do")
+	public String getFreeList(Model model) {
+		model.addAttribute("list", freeService.getFreeList());
+		return "free/list";
+	}
+	
+	@RequestMapping("detail.do")
+	public String getFree(@RequestParam("no") int no, Model model) {
+		model.addAttribute("Free", freeService.getFree(no));
+		return "free/get";
+	}
+
+	@GetMapping("insert.do")
+	public String insFree(Free Free, Model model) {
+		return "free/insert";
+	}
+	
+	@PostMapping("insertPro.do")
+	public String insFreePro(Free free, HttpSession session, Model model) {
+		String id = (String) session.getAttribute("sid");
+		free.setId(id);
+		freeService.insFree(Free);
+		return "redirect:list.do";
+	}
+
+	@GetMapping("update.do")
+	public String upFree(@RequestParam("no") int no, Model model) {
+		model.addAttribute("Free", freeService.getFree(no));
+		return "free/edit";
+	}
+	
+	@PostMapping("updatePro.do")
+	public String upFreePro(@RequestAttribute("Free") Free Free, Model model) {
+		freeService.upFree(Free);
+		return "redirect:list.do";
+	}
+	
+	@RequestMapping("delFree.do")
+	public String delFree(@RequestParam("no") int no, Model model) {
+		freeService.delFree(no);
+		return "redirect:list.do";
+	}
+}

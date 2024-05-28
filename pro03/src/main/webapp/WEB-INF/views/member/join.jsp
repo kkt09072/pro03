@@ -15,6 +15,7 @@
 	.title { padding-top:36px; padding-bottom:20px; }
     .agree_fr { width: 900px; white-space:pre-wrap; margin: 10px auto;
             padding: 24px; border:2px solid #eee; height:600px; overflow-y:auto; }
+    .table tr td, .table tr th { padding:14px; }        
 	</style>
 </head>
 <body>
@@ -40,19 +41,19 @@
     		<hr>
     		<div class="page-wrap">
             	<form name="frm1" id="frm1" action="${path2 }/member/joinPro.do" method="post" onsubmit="return joinCheck(this)">
-                	<table id="table1">
+                	<table id="table1" class="table">
 	                    <tbody>
 	                    <tr>
 	                        <th style="background-color:#dcdcdc">아이디</th>
 	                        <td>
 	                            <input type="text" name="id" id="id" placeholder="아이디 입력" pattern="^[a-z0-9]{5,12}" maxlength="12" class="input" required style="width:700px; float:left;">
-	                            <input type="button" id="idCkBtn" class="button is-primary" value="아이디 중복 체크" onclick="idCheck()">
+	                            <input type="button" id="idCkBtn" class="button is-primary" value="아이디 중복 체크" onclick="idCheck()" style="margin-left:20px">
 	                            <input type="hidden" name="idck" id="idck" value="no"/>
 	                            <c:if test="${empty qid }">
-	                                <p id="msg" style="padding-left:0.5rem">아직 아이디 중복 체크를 하지 않으셨습니다.</p>
+	                                <p id="msg" style="clear:both;padding:0.5rem">아직 아이디 중복 체크를 하지 않으셨습니다.</p>
 	                            </c:if>
 	                            <c:if test="${not empty qid }">
-	                                <p id="msg" style="padding-left:0.5rem">아이디 중복 체크후 수정하였습니다.</p>
+	                                <p id="msg" style="clear:both;padding:0.5rem">아이디 중복 체크후 수정하였습니다.</p>
 	                            </c:if>
 	                        </td>
 	                    </tr>
@@ -130,18 +131,18 @@
 	                    }
 	                    var params = {	id : $("#id").val()	} //전송되어질 데이터를 객체로 묶음
 	                    $.ajax({
-	                        url:"${path1 }/custom/idCheck.do",	//아이디가 전송되어질 곳
-	                        type:"post",		//전송방식
+	                        url:"${path2 }/member/idCheck.do?id="+$("#id").val(),	//아이디가 전송되어질 곳
+	                        type:"get",		//전송방식
 	                        dataType:"json",	//데이터 반환 방식
-	                        data:params,		//전송방식이 post인 경우 객체로 묶어서 전송
+	                        //data:params,		//전송방식이 post인 경우 객체로 묶어서 전송
 	                        success:function(result){
-	                            console.log(result.result);
-	                            var idChk = result.result;	//true 또는 false를 받음
-	                            if(idChk==false){	//사용할 수 없는 아이디
+	                            console.log(result.data);
+	                            var idChk = result.data;	//true 또는 false를 받음
+	                            if(!idChk){	//사용할 수 없는 아이디
 	                                $("#idck").val("no");
 	                                $("#msg").html("<strong style='color:red'>기존에 사용되고 있는 아이디 입니다. 다시 입력하시기 바랍니다.</strong>");
 	                                $("#id").focus();
-	                            } else if(idChk==true){	//사용 가능한 아이디
+	                            } else if(idChk){	//사용 가능한 아이디
 	                                $("#idck").val("yes");
 	                                $("#msg").html("<strong style='color:blue'>사용가능한 아이디 입니다.</strong>");
 	                            } else if(idck==""){

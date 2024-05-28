@@ -1,0 +1,57 @@
+package com.morning.biz;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.morning.domain.Member;
+
+@Service
+public class MemberService implements MemberBiz {
+
+	@Autowired
+	private MemberBiz memberDAO;
+	
+	@Override
+	public List<Member> getMemberList() {
+		return memberDAO.getMemberList();
+	}
+
+	@Override
+	public Member getMember(String id) {
+		Member member = null;
+		member = memberDAO.getMember(id);
+		return member;
+	}
+
+	@Override
+	public int memberCount() {
+		return memberDAO.memberCount();
+	}
+
+	@Override
+	public void insMember(Member member) {
+		memberDAO.insMember(member);
+	}
+
+	@Override
+	public void changePw(Member member) {
+		memberDAO.changePw(member);
+	}
+
+	@Override
+	public void changeInfo(Member member) {
+		memberDAO.changeInfo(member);
+	}
+
+	@Override
+	public void changePoint(Member member) {
+		memberDAO.changePoint(member);
+	}
+
+	@Override
+	public void delMember(String id) {
+		memberDAO.delMember(id);
+	}
+}

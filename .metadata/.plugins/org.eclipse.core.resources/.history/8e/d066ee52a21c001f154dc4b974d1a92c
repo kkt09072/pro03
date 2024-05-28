@@ -1,0 +1,52 @@
+package com.morning.biz;
+
+import java.util.List;
+
+import com.morning.domain.Free;
+
+public class FreeService implements FreeBiz {
+
+	@Override
+	public int getTotalCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<Free> getFreeList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Free getFree(int no) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insFree(Free free) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void upFree(Free free) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void hitCount(int no) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delFree(int no) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+}
