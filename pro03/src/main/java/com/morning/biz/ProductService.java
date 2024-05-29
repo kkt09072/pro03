@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.morning.domain.Product;
+import com.morning.domain.ProductVO;
 import com.morning.per.ProductMapper;
 
 @Service
@@ -20,17 +21,17 @@ public class ProductService implements ProductBiz {
 	}
 
 	@Override
-	public List<Product> getProductList() {
+	public List<ProductVO> getProductList() {
 		return productDAO.getProductList();
 	}
 
 	@Override
-	public List<Product> getProductCateList(String cate) {
+	public List<ProductVO> getProductCateList(String cate) {
 		return productDAO.getProductCateList(cate);
 	}
 
 	@Override
-	public Product getProduct(int pno) {
+	public ProductVO getProduct(int pno) {
 		return productDAO.getProduct(pno);
 	}
 

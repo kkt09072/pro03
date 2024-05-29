@@ -1,0 +1,49 @@
+package com.morning.per;
+
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.morning.domain.Inventory;
+
+@Repository
+public class InventoryDAO implements InventoryMapper {
+
+	@Autowired
+	private SqlSession sqlSession;
+	
+	@Override
+	public int getTotalCount() {
+		return sqlSession.selectOne("inventory.getTotalCount");
+	}
+
+	@Override
+	public List<Inventory> getInventoryList() {
+		return null;
+	}
+
+	@Override
+	public Inventory getInventory(int ino) {
+		return null;
+	}
+
+	@Override
+	public void insInventory(Inventory inventory) {
+		
+	}
+
+	@Override
+	public void upInventory(Inventory inventory) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delInventory(int ino) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

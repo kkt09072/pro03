@@ -27,10 +27,44 @@ commit;
 
 select * from fileboard;
 
-delete from fileboard where no=1;
+delete from fileboard where no=3;
 
 select * from product;
 
+delete from product where pno=3;
+
+ALTER TABLE product AUTO_INCREMENT = 1;
+
+-- ALTER TABLE product AUTO_INCREMENT = 1;
+
 desc product;
+
+desc inventory;
+
+select p.pno as pno, p.cate as cate, p.pname as pname,
+p.com as com, p.img as img, p.img2 as img2, p.img3 as img3,
+avg(i.iprice) as iprice, max(i.oprice) as oprice,
+sum(i.amount) as amount from product p, inventory i 
+where p.pno=i.pno;
+
+insert into inventory values (default, 1, 600, 900, 10, '', default);
+
+drop view productvo;
+
+create view productvo as (select p.pno as pno, p.cate as cate, p.pname as pname,
+p.com as com, p.img as img, p.img2 as img2, p.img3 as img3,
+avg(i.iprice) as iprice, max(i.oprice) as oprice,
+sum(i.amount) as amount from product p, inventory i 
+where p.pno=i.pno); 
+
+select ino, avg(iprice) as iprice, max(oprice)  as oprice, sum(amount) as amount, 
+remark, resdate from inventory;
+
+create view inventoryvo as (select ino, avg(iprice) as iprice, max(oprice)  as oprice, sum(amount) as amount, 
+remark, resdate from inventory);
+
+select * from productvo where pno=1;
+
+
 
 

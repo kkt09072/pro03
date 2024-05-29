@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.morning.domain.Product;
+import com.morning.domain.ProductVO;
 
 @Repository
 public class ProductDAO implements ProductMapper {
@@ -20,17 +21,17 @@ public class ProductDAO implements ProductMapper {
 	}
 
 	@Override
-	public List<Product> getProductList() {
+	public List<ProductVO> getProductList() {
 		return sqlSession.selectList("product.getProductList");
 	}
 
 	@Override
-	public List<Product> getProductCateList(String cate) {
+	public List<ProductVO> getProductCateList(String cate) {
 		return sqlSession.selectList("product.getProductCateList", cate);
 	}
 
 	@Override
-	public Product getProduct(int pno) {
+	public ProductVO getProduct(int pno) {
 		return sqlSession.selectOne("product.getProduct", pno);
 	}
 
@@ -46,7 +47,7 @@ public class ProductDAO implements ProductMapper {
 
 	@Override
 	public void delProduct(int pno) {
-		sqlSession.delete("product.delProduct");		
+		sqlSession.delete("product.delProduct", pno);		
 	}
 
 }

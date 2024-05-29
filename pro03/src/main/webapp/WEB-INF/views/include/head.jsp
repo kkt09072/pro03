@@ -30,4 +30,12 @@
 /* 공통 사용자 정의 스타일 */
 #ft { border-top:3px solid #369; }
 .control { margin-top:10px; margin-bottom:10px; }
+.grid { width:1200px; margin:20px auto; }
+.grid .cel img { display:block; max-width:98%; margin:10px auto; }
+.table tr td.img_wrap { text-align:center; }
+.table tr td.img_wrap img { display:block; max-width:98%; margin:10px auto; }
+#page1 { clear:both; }
+#page1:after { content:""; display:block; width:100%; height:90px; }
+.pre_wrap { white-space:pre-line; }
+.red_txt { color:red; font-size:1.4em; }
 </style>

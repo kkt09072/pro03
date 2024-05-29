@@ -6,16 +6,21 @@
 	
 	<!-- 총 상품 수 -->
 	<select id="getTotalCount" resultType="int">
-		select COUNT(*) from product
+		select COUNT(*) from productvo
 	</select>
 	
 	<!-- 상품 목록 -->
-	<select id="getProductList" resultType="com.morning.domain.Product">
-		select * from product order by pno desc
+	<select id="getProductList" resultType="com.morning.domain.ProductVO">
+		select * from productvo order by pno desc
+	</select>
+
+	<!-- 상품 목록 -->
+	<select id="getProductCateList" parameterType="String" resultType="com.morning.domain.ProductVO">
+		select * from productvo where cate=#{cate} order by pno desc 
 	</select>
 	
 	<!-- 상품 상세 보기 -->	
-	<select id="getProduct" resultType="com.morning.domain.Product">
+	<select id="getProduct" resultType="com.morning.domain.ProductVO">
 		select * from product where pno=#{pno}
 	</select>
 	
@@ -27,11 +32,11 @@
 	
 	<!-- 상품 변경 -->
 	<update id="upProduct" parameterType="com.morning.domain.Product">
-		update product set pname=#{pname}, price=#{price} where pno=#{pno}
+		update product set cate=#{cate}, pname=#{pname}, price=#{price}, com=#{com}, img=#{img}, img2=#{img2}, img3=#{img3} where pno=#{pno}
 	</update>
 		
 	<!-- 상품 삭제 -->
-	<delete id="delProduct">
+	<delete id="delProduct" parameterType="int">
 		delete from product where pno=#{pno}
 	</delete>
 </mapper>

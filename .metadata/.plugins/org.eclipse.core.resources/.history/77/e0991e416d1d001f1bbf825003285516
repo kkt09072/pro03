@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="product">
+	
+	<!-- 총 상품 수 -->
+	<select id="getTotalCount" resultType="int">
+		select COUNT(*) from product
+	</select>
+	
+	<!-- 상품 목록 -->
+	<select id="getProductList" resultType="com.morning.domain.Product">
+		select * from product order by pno desc
+	</select>
+
+	<!-- 상품 목록 -->
+	<select id="getProductCateList" parameterType="String" resultType="com.morning.domain.Product">
+		select * from product where cate=#{cate} order by pno desc 
+	</select>
+	
+	<!-- 상품 상세 보기 -->	
+	<select id="getProduct" resultType="com.morning.domain.Product">
+		select * from product where pno=#{pno}
+	</select>
+	
+	<!-- 상품 등록 -->
+	<insert id="insProduct" parameterType="com.morning.domain.Product">
+		insert into product values (default, #{cate}, #{pname}, #{com},
+		#{price}, #{img}, #{img2}, #{img3})
+	</insert>
+	
+	<!-- 상품 변경 -->
+	<update id="upProduct" parameterType="com.morning.domain.Product">
+		update product set cate=#{cate}, pname=#{pname}, price=#{price}, com=#{com}, img=#{img}, img2=#{img2}, img3=#{img3} where pno=#{pno}
+	</update>
+		
+	<!-- 상품 삭제 -->
+	<delete id="delProduct" parameterType="int">
+		delete from product where pno=#{pno}
+	</delete>
+</mapper>

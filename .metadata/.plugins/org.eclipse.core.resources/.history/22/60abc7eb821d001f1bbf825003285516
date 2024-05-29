@@ -1,0 +1,154 @@
+<%@ page language="java" contentType="text/html charset=UTF8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<c:set var="path2" value="${pageContext.servletContext.contextPath }" />
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>상품 목록</title>
+	<jsp:include page="../include/head.jsp"></jsp:include>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-pagination/1.4.2/jquery.pagination.min.css">
+	<style>
+	.list, .tab_box { width:1200px; margin:20px auto; }
+	</style>
+</head>
+<body>
+<div class="full-wrap">
+    <!-- 헤더 부분 인클루드 -->
+    <header id="hd">
+    	<div class="container">
+    		<jsp:include page="../include/hd.jsp"></jsp:include>
+    	</div>
+    </header>
+    <main id="contents" class="contents">
+    	<div id="breadcrumb" class="container breadcrumb-wrap clr-fix" style="height:60px; line-height:60px;">
+	    	<nav class="breadcrumb" aria-label="breadcrumbs">
+			  <ul>
+			    <li><a href="${path2 }">Home</a></li>
+			    <li><a href="${path2 }/product/list.do">상품</a></li>
+			    <li class="is-active"><a href="#" aria-current="page">목록</a></li>
+			  </ul>
+			</nav>
+    	</div>
+ 	    <section class="page" id="page1">
+    		<h2 class="page-title">상품 목록</h2>
+    		
+    		<div class="tab_box">
+	    		<div class="tabs">
+				  <ul>
+                        <li><a href="${path2 }/product/listAll.do" class="navbar-item" title="전체">
+                            전체 상품
+                        </a></li>
+                        <li><a href="${path2 }/product/list.do?cate=note" class="navbar-item" title="노트">
+                            Note
+                        </a></li>
+                        <li><a href="${path2 }/product/list.do?cate=fancy" class="navbar-item" title="팬시">
+                            Fancy
+                        </a></li>
+                        <li><a href="${path2 }/product/list.do?cate=pen" class="navbar-item" title="필기류">
+                            Pen
+                        </a></li>
+                        <li><a href="${path2 }/product/list.do?cate=binder" class="navbar-item" title="바인더">
+                            Binder
+                        </a></li>
+                        <li><a href="${path2 }/product/list.do?cate=other" class="navbar-item" title="기타 및 집기류">
+                            Other
+                        </a></li>   
+				  </ul>
+				</div>
+    		</div>
+    		
+    		<div class="page-wrap">
+	    		<div class="clr-fix">
+	    			<input type="text" id="search" placeholder="검색어 입력"><br>
+					<div class="fixed-grid has-3-cols">
+						<ul class="grid" id="list1">
+							<c:if test="${not empty list }">
+								<c:forEach var="dto" items="${list }">
+								<li class="cell">
+									<a href="${path2 }/product/detail.do?pno=${dto.pno }" class="item_wrap">
+										<div class="item_box">
+											<img src="${path2 }/resources/upload/${dto.img3 }" class="item_pic"/>
+											<h4 class="list_cate">${dto.pno }</h4>
+											<h3 class="list_title">${dto.pname }</h3>
+											<p class="list_com">${dto.com }</p>
+											<p class="list_price"><strong class="red_txt">${dto.oprice }</strong></p>
+										</div>
+									</a>
+								</li>
+								</c:forEach>
+							</c:if>
+							<c:if test="${empty list }">
+								<li>
+									<p><strong>상품이 존재하지 않습니다.</strong></p>
+								</li>
+							</c:if>
+						</ul>
+						<div id="pagination-container"></div>
+					</div>
+					<hr>
+					<c:if test="${cus.id.equals('admin') }">
+					<div class="buttons">
+					  <a href="${path2 }/product/insert.do" class="button is-danger">상품 등록</a>
+					</div>
+					</c:if>
+					<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-pagination/1.4.2/jquery.pagination.min.js"></script>
+					    <script>
+			        $(document).ready(function() {
+			            var itemsPerPage = 5;
+			            var items = $('#list1 li');
+			            var numItems = items.length;
+			
+			            $('#pagination-container').pagination({
+			                items: numItems,
+			                itemsOnPage: itemsPerPage,
+			                displayedPages: 3,
+			                cssStyle: 'light-theme',
+			                onPageClick: function(pageNumber) {
+			                    var showFrom = (pageNumber - 1) * itemsPerPage;
+			                    var showTo = showFrom + itemsPerPage;
+			
+			                    items.hide().slice(showFrom, showTo).show();
+			                }
+			            });
+			
+			            // 초기 표시 설정
+			            items.hide().slice(0, itemsPerPage).show();
+			
+			            // 검색 기능 구현
+			            $('#search').on('keyup', function() {
+			                var searchTerm = $(this).val().toLowerCase();
+			                items.filter(function() {
+			                    var itemText = $(this).text().toLowerCase();
+			                    return itemText.indexOf(searchTerm) > -1;
+			                }).show().slice(itemsPerPage).hide();
+			
+			                var filteredItems = items.filter(function() {
+			                    return $(this).css('display') != 'none';
+			                });
+			
+			                $('#pagination-container').pagination('updateItems', filteredItems.length);
+			                $('#pagination-container').pagination('selectPage', 1);
+			            });
+			        });
+			    </script>
+				</div>
+    		</div>
+    	</section>
+    </main>
+    <!-- 푸터 부분 인클루드 -->
+    <footer id="ft">
+    	<jsp:include page="../include/ft.jsp"></jsp:include>
+    </footer>
+    <script>
+    $(document).ready(function(){
+    	$("#tb1_length, #tb1_filter").css("margin-bottom", "20px");
+    });
+    </script>
+</div>    
+</body>
+</html>

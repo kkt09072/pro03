@@ -1,0 +1,89 @@
+<%@ page language="java" contentType="text/html charset=UTF8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<c:set var="path2" value="${pageContext.servletContext.contextPath }" />
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>로그인</title>
+	<jsp:include page="../include/head.jsp"></jsp:include>
+	<style>
+    .table tr td, .table tr th { padding:14px; }  
+	</style>
+</head>
+<body>
+<div class="full-wrap">
+    <!-- 헤더 부분 인클루드 -->
+    <header id="hd">
+    	<div class="container">
+    		<jsp:include page="../include/hd.jsp"></jsp:include>
+    	</div>
+    </header>
+    <main id="contents" class="contents">
+    	<div id="breadcrumb" class="container breadcrumb-wrap clr-fix" style="height:60px; line-height:60px;">
+	    	<nav class="breadcrumb" aria-label="breadcrumbs">
+			  <ul>
+			    <li><a href="${path2 }">Home</a></li>
+			    <li><a href="${path2 }">Member</a></li>
+			    <li class="is-active"><a href="#" aria-current="page">Log In</a></li>
+			  </ul>
+			</nav>
+    	</div>
+ 	    <section class="page" id="page1">
+    		<h2 class="page-title">로그인</h2>
+    		<hr>
+    		<div class="page-wrap">
+	    		<div class="clr-fix">
+		            <form action="${path2 }/member/loginPro.do" method="post" name="loginForm">
+		                <div class="table_form_wrap">
+		                    <table class="table">
+		                        <tbody>
+		                        <tr>
+		                            <th><label for="id">아이디</label></th>
+		                            <td><input type="text" name="id" id="id" size="100" class="input" placeholder="아이디 입력" required>
+		                                <!--  pattern="^[a-z0-9]+$"  -->
+		                            </td>
+		                        </tr>
+		                        <tr>
+		                            <th><label for="pw">비밀번호</label></th>
+		                            <td><input type="password" name="pw" id="pw"  class="input" placeholder="비밀번호 입력" required>
+		                                <!--  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  -->
+		                            </td>
+		                        </tr>
+		                        <tr>
+		                            <td colspan="2">
+		                            	<div class="buttons">
+			                                <input type="submit" class="button is-danger" value="로그인">
+			                                <input type="reset" class="button is-info" value="취소">
+			                            </div>    
+		                            </td>
+		                        </tr>
+		                        </tbody>
+		                    </table>
+		                </div>
+		            </form>
+		            <script>
+		                function loginFaiure() {
+		                    alert("로그인 실패");
+		                }
+		            </script>
+		        </div>
+			</div>
+    	</section>
+    </main>
+    <!-- 푸터 부분 인클루드 -->
+    <footer id="ft">
+    	<jsp:include page="../include/ft.jsp"></jsp:include>
+    </footer>
+    <script>
+    $(document).ready(function(){
+    	$("#tb1_length, #tb1_filter").css("margin-bottom", "20px");
+    });
+    </script>
+</div>    
+</body>
+</html>

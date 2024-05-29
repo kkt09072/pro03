@@ -44,14 +44,33 @@
 		                        <tbody>
 		                        <tr>
 		                            <th><label for="id">아이디</label></th>
-		                            <td><input type="text" name="id" id="id" size="100" class="input" placeholder="아이디 입력" required>
+		                            <td>
+		                            	<div class="field">
+		                            		<p class="control has-icons-left has-icons-right">
+			                            		<input type="text" name="id" id="id" size="100" class="input" placeholder="아이디 입력" required>
+											    <span class="icon is-small is-left">
+											      <i class="fas fa-envelope"></i>
+											    </span>
+											    <span class="icon is-small is-right">
+											      <i class="fas fa-check"></i>
+											    </span>
+											  </p>
+		                            	</div>	
 		                                <!--  pattern="^[a-z0-9]+$"  -->
 		                            </td>
 		                        </tr>
 		                        <tr>
 		                            <th><label for="pw">비밀번호</label></th>
-		                            <td><input type="password" name="pw" id="pw"  class="input" placeholder="비밀번호 입력" required>
+		                            <td>
+			                            <div class="field">
+	  										<p class="control has-icons-left">
+		                            			<input type="password" name="pw" id="pw"  class="input" placeholder="비밀번호 입력" required>
 		                                <!--  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  -->
+		                                    	<span class="icon is-small is-left">
+											      <i class="fas fa-lock"></i>
+											    </span>
+										    </p>
+										</div>   
 		                            </td>
 		                        </tr>
 		                        <tr>
