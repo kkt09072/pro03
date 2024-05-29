@@ -1,5 +1,0 @@
-package com.morning.biz;
-
-public interface BoardBiz {
-	
-}

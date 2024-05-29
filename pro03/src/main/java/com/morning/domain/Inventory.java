@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Inventory {
 	private int ino;
+	private int pno;
+	private String pname;
 	private int iprice;
 	private int oprice;
 	private int amount;

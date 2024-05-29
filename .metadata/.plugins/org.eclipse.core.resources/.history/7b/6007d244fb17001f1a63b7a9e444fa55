@@ -1,6 +1,0 @@
-package com.morning.per;
-
-public class BoardDAO implements BoardMapper {
-	
-	
-}

@@ -69,7 +69,7 @@
 					  </c:if>
 					  <c:if test="${cus.id.equals('admin') or cus.id.equals(free.id)}">    
 					  <a href="${path2 }/free/update.do?no=${free.no }" class="button is-warning">글 수정</a>
-					  <a href="${path2 }/free/delfree.do?no=${free.no }" class="button is-danger is-dark">글 삭제</a>
+					  <a href="${path2 }/free/delFree.do?no=${free.no }" class="button is-danger is-dark">글 삭제</a>
 					  </c:if>
 					  <a href="${path2 }/free/list.do" class="button is-primary">글 목록</a>
 					</div>

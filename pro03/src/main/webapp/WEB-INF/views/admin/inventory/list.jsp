@@ -9,7 +9,7 @@
 	<meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>공지사항 목록</title>
+	<title>상품 재고 목록</title>
 	<jsp:include page="../../include/head.jsp"></jsp:include>
 </head>
 <body>
@@ -25,46 +25,43 @@
 	    	<nav class="breadcrumb" aria-label="breadcrumbs">
 			  <ul>
 			    <li><a href="${path2 }">Home</a></li>
-			    <li><a href="${path2 }/board/list.do">Notice</a></li>
-			    <li class="is-active"><a href="#" aria-current="page">List</a></li>
+			    <li><a href="${path2 }/admin/listInventory.do">재고</a></li>
+			    <li class="is-active"><a href="#" aria-current="page">목록</a></li>
 			  </ul>
 			</nav>
     	</div>
  	    <section class="page" id="page1">
-    		<h2 class="page-title">공지사항 목록</h2>
+    		<h2 class="page-title">상품 재고 목록</h2>
     		<div class="page-wrap">
 	    		<div class="clr-fix">
 	    			<br>
 					<table class="table" id="tb1">
 						<thead>
 							<tr>
-								<th class="item1">번호</th>
-								<th class="item2">제목</th>
-								<th class="item3">작성일</th>
-								<th class="item4">조회수</th>
+								<th class="item1">상품번호</th>
+								<th class="item2">상품명</th>
+								<th class="item3">재고수량</th>
+								<th class="item4">평균 입고가격</th>
+								<th class="item5">최고 판매가격</th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:if test="${not empty list }">
 								<c:forEach var="dto" items="${list }">
 								<tr>
-									<td>${dto.bno }</td>
+									<td>${dto.pno }</td>
 									<td>
-										<a href="${path2 }/board/detail.do?bno=${dto.bno }">${dto.title }</a>
-<!-- 									<c:if test="${empty cus }">
-										<strong>${dto.title }</strong>
-										</c:if>
-										<c:if test="${not empty cus }">
-										<a href="${path2 }/board/detail.do?bno=${dto.bno }">${dto.title }</a>
-										</c:if>  -->
+										<a href="${path2 }/admin/detailInventory.do?pno=${dto.pno }">${dto.pname }</a>
 									</td>
-									<td>${dto.resdate }</td><td>${dto.vcnt }</td>
+									<td>${dto.amount }</td>
+									<td>${dto.iprice }</td>
+									<td>${dto.oprice }</td>
 								</tr>
 								</c:forEach>
 							</c:if>
 							<c:if test="${empty list }">
 								<tr>
-									<td colspan="4"><strong>공지사항이 존재하지 않습니다.</strong></td>
+									<td colspan="4"><strong>재고 목록이 존재하지 않습니다.</strong></td>
 								</tr>
 							</c:if>
 						</tbody>
@@ -79,7 +76,7 @@
 					<hr>
 					<c:if test="${cus.id.equals('admin') }">
 					<div class="buttons">
-					  <a href="${path2 }/board/insert.do" class="button is-danger">글 등록</a>
+					  <a href="${path2 }/admin/insertInventory.do" class="button is-danger">상품 입고</a>
 					</div>
 					</c:if>
 				</div>

@@ -97,6 +97,7 @@
 					<c:if test="${cus.id.equals('admin') }">
 					<div class="buttons">
 					  <a href="${path2 }/product/insert.do" class="button is-danger">상품 등록</a>
+	                  <a href="${path2}/product/insertInventory.do" class="button is-light">상품 입고</a>	                        
 					</div>
 					</c:if>
 					<script src="${path2 }/resources/js/jquery.pagination.js"></script>

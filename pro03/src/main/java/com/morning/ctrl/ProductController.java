@@ -2,6 +2,8 @@ package com.morning.ctrl;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,8 +21,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
 import com.morning.biz.InventoryBiz;
 import com.morning.biz.ProductBiz;
+import com.morning.domain.CategoryVO;
 import com.morning.domain.Inventory;
 import com.morning.domain.Product;
 import com.morning.domain.ProductVO;
@@ -33,10 +37,7 @@ public class ProductController {
 	
 	@Autowired
 	private ProductBiz productService;
-	
-	@Autowired
-	private InventoryBiz inventoryService;
-	
+		
 	String uploadLoc = "/resources/upload/";
 	
 	@RequestMapping("listAll.do")
@@ -57,179 +58,6 @@ public class ProductController {
 		return "product/get";
 	}
 
-	@GetMapping("insert.do")
-	public String insProduct(Product product, Model model) {
-		return "product/insert";
-	}
-	
-	@PostMapping("insertPro.do")
-	public String insProductPro(
-			@RequestParam("cate") String cate,
-			@RequestParam("pname") String pname,
-			@RequestParam("com") String com,
-			@RequestParam("price") int price,
-			@RequestParam("img") MultipartFile img,
-			@RequestParam("img2") MultipartFile img2,
-			@RequestParam("img3") MultipartFile img3, 
-			HttpServletRequest request,
-			HttpServletResponse response, Model model) {
-		
-		String uploadDir = request.getServletContext().getRealPath(uploadLoc);
-		File dir = new File(uploadDir);
-		
-		String imgName="", img2Name="", img3Name="";
-		
-		if(!dir.exists()) {
-			dir.mkdirs();
-		}
-		
-		try {
-			if(!img.isEmpty()) {
-				imgName = saveFile(img, uploadDir);
-				log.info("업로드 파일1 이름 : {}", imgName);
-			}
-			if(!img2.isEmpty()) {
-				img2Name = saveFile(img2, uploadDir);
-				log.info("업로드 파일2 이름 : {}", img2Name);
-			}
-			if(!img3.isEmpty()) {
-				img3Name = saveFile(img3, uploadDir);
-				log.info("업로드 파일3 이름 : {}", img3Name);
-			}
-		} catch (IOException e) {
-			log.error("예외 : {}", e);
-		}
-		
-		Product product = new Product();
-		product.setCate(cate);
-		product.setPname(pname);
-		product.setCom(com);
-		product.setPrice(price);
-		product.setImg(imgName);
-		product.setImg2(img2Name);
-		product.setImg3(img3Name);
-		
-		productService.insProduct(product);
-		return "redirect:list.do?cate="+product.getCate();
-	}
 
-	public String saveFile(MultipartFile file, String uploadDir) throws IOException {
-		String originalFilename = file.getOriginalFilename();
-		String ext = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
-		String newFilename = UUID.randomUUID().toString() + ext;
-		File serverFile = new File(uploadDir + newFilename);
-		file.transferTo(serverFile);
-		return newFilename;
-	}
-	
-	@GetMapping("update.do")
-	public String upProduct(@RequestParam("pno") int pno, Model model) {
-		model.addAttribute("product", productService.getProduct(pno));
-		return "product/edit";
-	}
-	
-	@PostMapping("updatePro.do")
-	public String upProductPro(@RequestParam("pno") int pno,
-			@RequestParam("cate") String cate,
-			@RequestParam("pname") String pname,
-			@RequestParam("com") String com,
-			@RequestParam("price") int price,
-			@RequestParam("img") MultipartFile img,
-			@RequestParam("img2") MultipartFile img2,
-			@RequestParam("img3") MultipartFile img3, HttpServletRequest request,
-			HttpServletResponse response, Model model) {
-		
-		ProductVO before = productService.getProduct(pno);
-		
-		String uploadDir = request.getServletContext().getRealPath(uploadLoc);
-		File dir = new File(uploadDir);
-		
-		String imgName="", img2Name="", img3Name="";
-		
-		if(!dir.exists()) {
-			dir.mkdirs();
-		}
-		
-		try {
-			if(!img.isEmpty()) {
-				imgName = saveFile(img, uploadDir);
-				log.info("변경 파일1 이름 : {}", imgName);
-			} else {
-				imgName = before.getImg();
-			}
-			if(!img2.isEmpty()) {
-				img2Name = saveFile(img2, uploadDir);
-				log.info("변경 파일2 이름 : {}", img2Name);
-			} else {
-				img2Name = before.getImg2();
-			}
-			if(!img3.isEmpty()) {
-				img3Name = saveFile(img3, uploadDir);
-				log.info("변경 파일3 이름 : {}", img3Name);
-			} else {
-				imgName = before.getImg3();
-			}
-		} catch (IOException e) {
-			log.error("예외 : {}", e);
-		}
-		
-		Product product = new Product();
-		product.setCate(cate);
-		product.setPname(pname);
-		product.setCom(com);
-		product.setImg(imgName);
-		product.setImg2(img2Name);
-		product.setImg3(img3Name);
-		
-		productService.upProduct(product);
-		return "redirect:list.do?cate="+product.getCate();
-	}
-	
-	@RequestMapping("delProduct.do")
-	public String delProduct(@RequestParam("pno") int pno, @RequestParam("cate") String cate, Model model) {
-		productService.delProduct(pno);
-		return "redirect:list.do?cate="+cate;
-	}
-	
-	@RequestMapping("listInventory.do")
-	public String getInventoryList(Model model) {
-		model.addAttribute("list", inventoryService.getInventoryList());
-		return "inventory/list";
-	}
-	
-	@RequestMapping("detailInventory.do")
-	public String getInventory(@RequestParam("ino") int ino, Model model) {
-		model.addAttribute("inventory", inventoryService.getInventory(ino));
-		return "inventory/get";
-	}
 
-	@GetMapping("insertInventory.do")
-	public String insInventory(Inventory inventory, Model model) {
-		return "inventory/insert";
-	}
-	
-	@PostMapping("insertInventoryPro.do")
-	public String insInventoryPro(@RequestAttribute("inventory") Inventory inventory, Model model) {
-		inventoryService.insInventory(inventory);
-		return "redirect:inventoryList.do";
-	}
-	
-	@GetMapping("updateInventory.do")
-	public String upInventory(@RequestParam("ino") int ino, Model model) {
-		model.addAttribute("inventory", inventoryService.getInventory(ino));
-		return "inventory/edit";
-	}
-	
-	@PostMapping("updateInventoryPro.do")
-	public String upInventoryPro(@RequestAttribute("inventory") Inventory inventory, Model model) {
-		inventoryService.upInventory(inventory);
-		return "redirect:inventoryList.do";
-	}
-	
-	@RequestMapping("delInventory.do")
-	public String delInventory(@RequestParam("ino") int ino, Model model) {
-		inventoryService.delInventory(ino);
-		return "redirect:inventoryList.do";
-	}
-	
 }

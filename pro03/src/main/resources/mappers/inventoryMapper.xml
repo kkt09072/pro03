@@ -9,14 +9,18 @@
 		select COUNT(*) from inventoryvo
 	</select>
 
+	<select id="categoryLoading" parameterType="String" resultType="com.morning.domain.CategoryVO">
+		select cate, pno, pname from product where cate=#{cate}
+	</select>
+
 	<!-- 재고 목록 조회 -->
 	<select id="getInventoryList" resultType="com.morning.domain.Inventory">
 		select * from inventoryvo 
 	</select>	
 	
 	<!-- 재고 상세 보기 -->
-	<select id="getInventory" parameterType="com.morning.domain.Inventory">
-		select * from inventoryvo where ino=#{ino}
+	<select id="getInventory" resultType="com.morning.domain.Inventory">
+		select * from inventoryvo where pno=#{pno}
 	</select>
 	
 	<!-- 재고/판매 등록 -->

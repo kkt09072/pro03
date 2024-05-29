@@ -86,10 +86,11 @@
 					</table>
 					<hr>
 					<div class="buttons">
-					  <c:if test="${cus.id.equals('admin') }">
-					  <a href="${path2 }/product/insert.do" class="button is-danger">상품 등록</a>
-					  <a href="${path2 }/product/update.do?pno=${product.pno }" class="button is-warning">상품 수정</a>
-					  <a href="${path2 }/product/delProduct.do?pno=${product.pno }&cate=${product.cate }" class="button is-danger is-dark">상품 삭제</a>
+					  <c:if test="${cus.id.equals('admin') }">					  
+						  <a href="${path2 }/admin/insertProduct.do" class="button is-danger">상품 등록</a>
+						  <a href="${path2}/admin/insertInventory.do" class="button is-light">상품 입고</a>
+						  <a href="${path2 }/admin/updateProduct.do?pno=${product.pno }" class="button is-warning">상품 수정</a>
+						  <a href="${path2 }/admin/delProduct.do?pno=${product.pno }&cate=${product.cate }" class="button is-danger is-dark">상품 삭제</a>
 					  </c:if>
 					  <a href="${path2 }/product/listAll.do" class="button is-primary">상품 목록</a>
 					</div>

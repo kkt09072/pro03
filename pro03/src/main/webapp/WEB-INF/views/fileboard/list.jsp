@@ -87,7 +87,7 @@
 					<hr>
 					<c:if test="${cus.id.equals('admin') }">
 					<div class="buttons">
-					  <a href="${path2 }/fileboard/insert.do" class="button is-danger">글 등록</a>
+					  <a href="${path2 }/admin/insertFileboard.do" class="button is-danger">글 등록</a>
 					</div>
 					</c:if>
 				</div>

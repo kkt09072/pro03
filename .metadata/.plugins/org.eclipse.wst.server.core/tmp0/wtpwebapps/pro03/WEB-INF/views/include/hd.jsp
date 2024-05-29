@@ -122,8 +122,11 @@
                         </a>
                     </c:if>
                     <c:if test="${sid.equals('admin')}">
-                        <a href="${path1}/member/list.do" class="button is-light">
+                        <a href="${path1}/admin/memberList.do" class="button is-light">
                             MemberList
+                        </a>
+                        <a href="${path1}/admin/insertInventory.do" class="button is-light">
+                            상품 입고
                         </a>
                     </c:if>
                     </div>

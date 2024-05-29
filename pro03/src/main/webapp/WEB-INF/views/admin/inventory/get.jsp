@@ -9,7 +9,7 @@
 	<meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>공지사항 상세보기</title>
+	<title>재고 내용 상세보기</title>
 	<jsp:include page="../../include/head.jsp"></jsp:include>
 </head>
 <body>
@@ -25,47 +25,46 @@
 	    	<nav class="breadcrumb" aria-label="breadcrumbs">
 			  <ul>
 			    <li><a href="${path2 }">Home</a></li>
-			    <li><a href="${path2 }/board/list.do">Notice</a></li>
-			    <li class="is-active"><a href="#" aria-current="page">Detail</a></li>
+			    <li><a href="${path2 }/admin/listInventory.do">재고</a></li>
+			    <li class="is-active"><a href="#" aria-current="page">상세 보기</a></li>
 			  </ul>
 			</nav>
     	</div>
  	    <section class="page" id="page1">
-    		<h2 class="page-title">공지사항 글 상세보기</h2>
+    		<h2 class="page-title">상품 재고 상세보기</h2>
     		<div class="page-wrap">
  				<div class="clr-fix">
 					<table id="tb1" class="table" width="1200">
 						<tbody>
 							<tr>
-								<th>글 번호</th>
-								<td>${board.bno }</td>
+								<th>상품 번호</th>
+								<td>${inventory.pno }</td>
 							</tr>
 							<tr>
-								<th>글 제목</th>
-								<td>${board.title }</td>
+								<th>상품명</th>
+								<td>${inventory.pname }</td>
 							</tr>
 							<tr>
-								<th>글 내용</th>
-								<td>${board.content }</td>
+								<th>평균 입고가격</th>
+								<td>${inventory.iprice }</td>
 							</tr>
 							<tr>
-								<th>작성일시</th>		
-								<td>${board.resdate }</td>
+								<th>최고 판매가</th>		
+								<td>${inventory.oprice }</td>
 							</tr>
 							<tr>
-								<th>조회수</th>
-								<td>${board.vcnt }</td>
+								<th>남은 수량</th>
+								<td>${inventory.amount }</td>
 							</tr>
 						</tbody>
 					</table>
 					<hr>
 					<div class="buttons">
 					  <c:if test="${cus.id.equals('admin') }">
-					  <a href="${path2 }/board/insert.do" class="button is-danger">글 등록</a>
-					  <a href="${path2 }/board/update.do?bno=${board.bno }" class="button is-warning">글 수정</a>
-					  <a href="${path2 }/board/delBoard.do?bno=${board.bno }" class="button is-danger is-dark">글 삭제</a>
+						  <a href="${path2 }/admin/insertInventory.do" class="button is-danger">상품 입고</a>
+						  <a href="${path2 }/admin/productReturn.do?pno=${inventory.pno }" class="button is-danger is-dark">반출 처리</a>
 					  </c:if>
-					  <a href="${path2 }/board/list.do" class="button is-primary">글 목록</a>
+					  <a href="${path2 }/admin/listInventory.do" class="button is-primary">재고 목록</a>
 					</div>
 				</div>
     		</div>

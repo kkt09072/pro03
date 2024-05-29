@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.morning.domain.CategoryVO;
 import com.morning.domain.Inventory;
 
 @Repository
@@ -23,10 +24,15 @@ public class InventoryDAO implements InventoryMapper {
 	public List<Inventory> getInventoryList() {
 		return sqlSession.selectList("inventory.getInventoryList");
 	}
+	
+	@Override
+	public List<CategoryVO> categoryLoading(String cate) {
+		return sqlSession.selectList("inventory.categoryLoading", cate);
+	}
 
 	@Override
-	public Inventory getInventory(int ino) {
-		return sqlSession.selectOne("inventory.getInventory", ino);
+	public Inventory getInventory(int pno) {
+		return sqlSession.selectOne("inventory.getInventory", pno);
 	}
 
 	@Override

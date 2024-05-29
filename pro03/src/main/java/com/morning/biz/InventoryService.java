@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.morning.domain.CategoryVO;
 import com.morning.domain.Inventory;
 import com.morning.per.InventoryMapper;
 
@@ -25,8 +26,13 @@ public class InventoryService implements InventoryBiz {
 	}
 
 	@Override
-	public Inventory getInventory(int ino) {
-		return inventoryDAO.getInventory(ino);
+	public List<CategoryVO> categoryLoading(String cate) {
+		return inventoryDAO.categoryLoading(cate);
+	}
+
+	@Override
+	public Inventory getInventory(int pno) {
+		return inventoryDAO.getInventory(pno);
 	}
 
 	@Override

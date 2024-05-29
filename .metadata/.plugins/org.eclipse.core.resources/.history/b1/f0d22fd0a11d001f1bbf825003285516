@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+
+	<select id="getMemberList" resultType="com.morning.domain.Member">
+		select * from member order by resdate desc
+	</select>	
+	<select id="getMember" parameterType="String" resultType="com.morning.domain.Member">
+		select * from member where id=#{id}
+	</select>
+	<select id="memberCount" resultType="int">
+		select count(*) from member
+	</select>
+	<insert id="insMember">
+		insert into member values (#{id}, #{pw}, #{name}, #{email}, #{tel}, 
+		#{addr1}, #{addr2}, #{postcode}, #{birth}, default, default)
+	</insert>
+	<update id="changePw">
+		update member set pw=#{pw} where id=#{id}
+	</update>
+	<update id="changeInfo">
+		update member set name=#{name}, email=#{email}, tel=#{tel}, 
+		addr1=#{addr1}, addr2=#{addr2}, postcode=#{postcode} where id=#{id}
+	</update>
+	<update id="changePoint">
+		update member set point=point+#{point} where id=#{id}
+	</update>
+	<delete id="delMember">
+		delete from member where id=#{id}
+	</delete>
+</mapper>

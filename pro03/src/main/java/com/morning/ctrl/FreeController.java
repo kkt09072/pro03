@@ -151,12 +151,12 @@ public class FreeController {
 	}
 	
 	@PostMapping("updatePro.do")
-	public String upFreePro(@RequestAttribute("free") Free free, Model model) {
+	public String upFreePro(Free free, Model model) {
 		freeService.upFree(free);
 		return "redirect:list.do";
 	}
 	
-	@RequestMapping("delFree.do")
+	@GetMapping("delFree.do")
 	public String delFree(@RequestParam("no") int no, Model model) {
 		freeService.delFree(no);
 		return "redirect:list.do";

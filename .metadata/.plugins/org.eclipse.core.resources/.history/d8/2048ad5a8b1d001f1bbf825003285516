@@ -1,0 +1,6 @@
+package com.morning.domain;
+
+public class CategoryVO {
+	private String cate;
+	private String cateName;
+}

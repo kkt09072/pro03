@@ -57,14 +57,24 @@ avg(i.iprice) as iprice, max(i.oprice) as oprice,
 sum(i.amount) as amount from product p, inventory i 
 where p.pno=i.pno); 
 
-select ino, avg(iprice) as iprice, max(oprice)  as oprice, sum(amount) as amount, 
-remark, resdate from inventory;
 
-create view inventoryvo as (select ino, avg(iprice) as iprice, max(oprice)  as oprice, sum(amount) as amount, 
-remark, resdate from inventory);
+drop view inventoryvo;
+
+select i.ino as ino, i.pno as pno, p.pname as pname, 
+avg(i.iprice) as iprice, 
+max(i.oprice) as oprice, sum(i.amount) as amount, 
+i.remark as remark, max(i.resdate) as resdate 
+from inventory i, product p where i.pno=p.pno group by p.pno, i.pno;
+
+create view inventoryvo as (select i.ino as ino, i.pno as pno, p.pname as pname, 
+avg(i.iprice) as iprice, 
+max(i.oprice) as oprice, sum(i.amount) as amount, 
+i.remark as remark, max(i.resdate) as resdate 
+from inventory i, product p where i.pno=p.pno group by p.pno, i.pno);
 
 select * from productvo where pno=1;
 
+select * from inventoryvo where pno=1;
 
 
 

@@ -1,0 +1,5 @@
+package com.morning.ctrl;
+
+public class AdminController {
+
+}

@@ -9,7 +9,7 @@
 	<meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>공지사항 글 등록</title>
+	<title>상품 입고</title>
 	<jsp:include page="../../include/head.jsp"></jsp:include>
 </head>
 <body>
@@ -25,39 +25,111 @@
 	    	<nav class="breadcrumb" aria-label="breadcrumbs">
 			  <ul>
 			    <li><a href="${path2 }">Home</a></li>
-			    <li><a href="${path2 }/board/list.do">Notice</a></li>
-			    <li class="is-active"><a href="#" aria-current="page">Write</a></li>
+			    <li><a href="${path2 }/admin/listInventory.do">재고</a></li>
+			    <li class="is-active"><a href="#" aria-current="page">상품 등록</a></li>
 			  </ul>
 			</nav>
     	</div>
  	    <section class="page" id="page1">
-    		<h2 class="page-title">공지사항 목록</h2>
+    		<h2 class="page-title">상품 입고</h2>
     		<div class="page-wrap">
 	    		<div class="clr-fix">
 	    			<br>
-					<form action="${path2 }/board/insertPro.do" method="post">
+					<form action="${path2 }/admin/insertInventoryPro.do" method="post">
 						<table class="table">
 							<tbody>
 								<tr>
-									<th><label for="title">제목</label></th>
+									<th><label for="cate">카테고리</label></th>
 									<td>
-										<input type="text" name="title" id="title" class="input" maxlength="100" required>
+										<select id="cate" class="select">
+											<option value="">선택안함</option>
+											<option value="note">노트</option>
+											<option value="fancy">팬시</option>
+											<option value="pen">필기구</option>
+											<option value="binder">파일철/바인더</option>
+											<option value="other">집기류/기타</option>
+										</select>
 									</td>
 								</tr>
 								<tr>
-									<th><label for="content">내용</label></th>
+									<th><label for="pno">상품명</label></th>
 									<td>
-										<textarea name="content" id="content" rows="8" cols="80" class="textarea"></textarea>
+										<select name="pno" id="pno" class="select">
+											<option value="">선택안함</option>
+
+										</select>
+										<input type="hidden" name="pname" id="pname" />
+									</td>
+								</tr>
+								<tr>
+									<th><label for="iprice">입고가격</label></th>
+									<td>
+										<input type="number" name="iprice" id="iprice" min="0" step="100" class="input" required>
+									</td>
+								</tr>
+								<tr>
+									<th><label for="oprice">출고가격</label></th>
+									<td>
+										<input type="number" name="oprice" id="oprice" min="0" step="100" class="input" required>
+									</td>
+								</tr>
+								<tr>
+									<th><label for="amount">입고 수량</label></th>
+									<td>
+										<input type="number" name="amount" id="amount" min="0" step="1" class="input" required>
+									</td>
+								</tr>
+								<tr>
+									<th><label for="remark">참고 사항</label></th>
+									<td>
+										<input type="text" name="remark" id="remark" class="input">
 									</td>
 								</tr>
 							</tbody>
 						</table>
 						<hr>
 						<div class="buttons">
-						  <button type="submit" class="button is-danger">글 등록</button>
-						  <a href="${path2 }/board/list.do" class="button is-primary">글 목록</a>
+						  <button type="submit" class="button is-danger">상품 입고 처리</button>
+						  <a href="${path2 }/admin/listInventory.do" class="button is-primary">상품 재고 목록</a>
 						</div>
 					</form>
+					<script>
+					$(document).ready(function(){
+						$("#cate").change(function(){
+							var value = $(this).val();
+							if(value!=""){
+								$.ajax({
+			                        url:"${path2 }/admin/categoryLoading.do",	//아이디가 전송되어질 곳
+			                        type:"get",		//전송방식
+			                        data: { cate : value },
+			                        dataType:"json",	//데이터 반환 방식
+                                    success: function(result){
+                                    	console.log(result);
+                                        var $pno = $("#pno");
+                                        $pno.empty(); // 기존 옵션 비우기
+                                        $pno.append("<option value=''>선택안함</option>");
+                                        if (result && result.length > 0) {
+                                            $.each(result, function(index, item) {
+                                                var option = $("<option></option>").val(item.pno).text(item.pname);
+                                                $pno.append(option);
+                                            });
+                                        } else {
+                                            $pno.append('<option value="">해당 카테고리에 상품이 없습니다</option>');
+                                        }
+                                    },
+                                    error: function() {
+                                        alert("상품 목록을 불러오는 중 오류가 발생했습니다.");
+                                    }
+			                    });
+							}
+						});
+						
+						$("#pno").change(function(){
+							var value = $(this).text();
+							$("#pname").val(value);
+						});
+					});
+					</script>
 				</div>
     		</div>
     	</section>
