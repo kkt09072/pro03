@@ -1,0 +1,45 @@
+package com.morning.biz;
+
+import java.util.List;
+
+import com.morning.domain.Product;
+
+public class ProductService implements ProductBiz {
+
+	@Override
+	public int getTotalCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<Product> getProductList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Product getProduct(int pno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insProduct(Product product) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void upProduct(Product product) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delProduct(int pno) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

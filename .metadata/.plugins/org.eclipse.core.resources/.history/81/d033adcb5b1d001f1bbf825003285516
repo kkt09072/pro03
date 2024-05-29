@@ -1,0 +1,63 @@
+package com.morning.ctrl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.morning.biz.ProductBiz;
+import com.morning.domain.Product;
+
+@Controller
+@RequestMapping("/product/")
+public class ProductController {
+	
+	@Autowired
+	private ProductBiz productService;
+	
+	
+	@RequestMapping("list.do")
+	public String getProductList(Model model) {
+		model.addAttribute("list", productService.getProductList());
+		return "product/list";
+	}
+	
+	@RequestMapping("detail.do")
+	public String getBoard(@RequestParam("pno") int pno, Model model) {
+		model.addAttribute("product", productService.getProduct(pno));
+		return "product/get";
+	}
+
+	@GetMapping("insert.do")
+	public String insProduct(Product product, Model model) {
+		return "product/insert";
+	}
+	
+	@PostMapping("insertPro.do")
+	public String insProductPro(Product product, Model model) {
+		productService.insProduct(product);
+		return "redirect:list.do";
+	}
+
+	@GetMapping("update.do")
+	public String upProduct(@RequestParam("pno") int pno, Model model) {
+		model.addAttribute("product", productService.getProduct(pno));
+		return "product/edit";
+	}
+	
+	@PostMapping("updatePro.do")
+	public String upProductPro(@RequestAttribute("product") Product product, Model model) {
+		productService.upProduct(product);
+		return "redirect:list.do";
+	}
+	
+	@RequestMapping("delProduct.do")
+	public String delProduct(@RequestParam("pno") int pno, Model model) {
+		productService.delProduct(pno);
+		return "redirect:list.do";
+	}
+}

@@ -68,9 +68,6 @@
                             Pen
                         </a>
                         <hr class="navbar-divider">
-                        <a href="${path1 }/product/list.do?cate=file" class="navbar-item" title="파일철">
-                            File
-                        </a>
                         <a href="${path1 }/product/list.do?cate=binder" class="navbar-item" title="바인더">
                             Binder
                         </a>

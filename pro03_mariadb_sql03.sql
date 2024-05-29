@@ -23,9 +23,14 @@ f.resdate, m.id as id, m.name as name from free f, member m where f.id=m.id);
 
 select * from ckboard;
 
-
 commit;
 
 select * from fileboard;
 
 delete from fileboard where no=1;
+
+select * from product;
+
+desc product;
+
+

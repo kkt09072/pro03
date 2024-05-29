@@ -1,0 +1,52 @@
+package com.morning.per;
+
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.morning.domain.Product;
+
+@Repository
+public class ProductDAO implements ProductMapper {
+
+	@Autowired
+	private SqlSession sqlSession;
+	
+	@Override
+	public int getTotalCount() {
+		return sqlSession.selectOne("product.getTotalCount");
+	}
+
+	@Override
+	public List<Product> getProductList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Product getProduct(int pno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insProduct(Product product) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void upProduct(Product product) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delProduct(int pno) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
