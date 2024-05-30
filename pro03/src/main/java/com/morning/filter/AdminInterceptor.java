@@ -13,6 +13,14 @@ import com.morning.domain.Member;
 public class AdminInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+
+    	String requestURI = request.getRequestURI();
+    	
+        // /sales/ 경로에 대해 예외 처리
+        if(requestURI.startsWith(request.getContextPath() + "/sales/")) {
+            return true;
+        }
+
         HttpSession session = request.getSession();
         Member ses = (Member) session.getAttribute("cus");
         
@@ -24,7 +32,6 @@ public class AdminInterceptor extends HandlerInterceptorAdapter {
         if(ses.getId().equals("admin")){ //관리자(admin) 계정인 경우 (/admin/**) 접근 가능
             return true;
         } else { //관리자(admin) 계정이 아닌 경우
-        	
             response.sendRedirect(request.getContextPath()+"/member/login.do");
             return false;
         }

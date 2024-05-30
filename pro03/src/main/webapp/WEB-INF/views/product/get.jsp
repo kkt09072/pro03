@@ -92,8 +92,8 @@
 						  <a href="${path2 }/admin/updateProduct.do?pno=${product.pno }" class="button is-warning">상품 수정</a>
 						  <a href="${path2 }/admin/delProduct.do?pno=${product.pno }&cate=${product.cate }" class="button is-danger is-dark">상품 삭제</a>
 					  </c:if>
-					  <c:if test="${not empty cus.id }">
-					  	  <a href="${path2 }/sales/insSales.do?pno=${product.pno }" class="button is-danger">구매</a>		
+					  <c:if test="${cus !=null }">
+					  	  <a href="${path2 }/sales/inSales.do?pno=${product.pno }" class="button is-dark">구매</a>		
 					  </c:if>
 					  <a href="${path2 }/product/listAll.do" class="button is-primary">상품 목록</a>
 					</div>

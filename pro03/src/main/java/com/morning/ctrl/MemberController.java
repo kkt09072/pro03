@@ -92,7 +92,7 @@ public class MemberController {
 	
 	@GetMapping("login.do")
 	public String login(Model model) {
-		session.invalidate();
+		//session.invalidate();
 		return "member/login";
 	}
 
@@ -106,7 +106,6 @@ public class MemberController {
 			session.setAttribute("sid", id);
 			session.setAttribute("spw", pw);
 			session.setAttribute("sname", cus.getName());
-			session.setAttribute("smember", cus);
 			model.addAttribute("msg", "로그인 성공");
 			return "redirect:/";
 		} else {

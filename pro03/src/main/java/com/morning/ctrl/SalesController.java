@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.morning.biz.InventoryBiz;
 import com.morning.biz.ProductBiz;
 import com.morning.biz.SalesBiz;
+import com.morning.domain.IamPortClient;
 import com.morning.domain.Sales;
 
 @Controller
@@ -48,14 +49,21 @@ public class SalesController {
 		return "sales/get";
 	}
 	
-	@GetMapping("insSales.do")
+	@RequestMapping("inSales.do")
 	public String insSales(@RequestParam("pno") int pno, Model model) {
+		log.info("Before Sales");
+		IamPortClient imPort = new IamPortClient(); 
+		model.addAttribute("code", IamPortClient.CODE);
+		model.addAttribute("key", IamPortClient.KEY);
+		model.addAttribute("secret", IamPortClient.SECRET);
+		model.addAttribute("gtid", imPort.getRandChar());
 		model.addAttribute("product", productService.getProduct(pno));
 		model.addAttribute("inventory", inventoryService.getInventory(pno));
+		log.info("After Sales");
 		return "sales/insert";
 	}
 	
-	@PostMapping("insSalesPro.do")
+	@PostMapping("inSalesPro.do")
 	public String insSalesPro(Sales sales, Model model) {
 		salesService.insSales(sales);
 		return "redirect:/product/listAll.do";

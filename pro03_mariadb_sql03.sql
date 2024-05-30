@@ -76,6 +76,12 @@ select * from productvo where pno=1;
 
 select * from inventoryvo where pno=1;
 
+alter table sales add gtid varchar(100);
+
+alter table sales add rname varchar(100);
+
 select * from sales;
+
+select * from member;
 
 

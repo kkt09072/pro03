@@ -1,0 +1,25 @@
+package com.morning.domain;
+
+import java.util.Date;
+
+import org.apache.commons.lang3.RandomStringUtils;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
+public class IamPortClient {
+	public final static String CODE = "";
+	public final static String KEY = "";
+	public final static String SECRET = "";
+
+	private String randChar;
+
+	public IamPortClient() {
+		Date date = new Date();
+		this.randChar =  date + RandomStringUtils.randomAlphanumeric(40);
+	}
+}

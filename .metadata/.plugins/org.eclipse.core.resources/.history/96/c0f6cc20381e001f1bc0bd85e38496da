@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc 
+		https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans 
+		https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context 
+		https://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/security 
+		http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<!-- DispatcherServlet 의 요청 처리 인프라를 정의 -->
+	
+	<!-- Spring MVC @Controller 프로그래밍 모델을 활성화합니다. -->
+	<annotation-driven />
+	
+	<!--  접근 자원에 대한 권한 설정 -->
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/data/**" location="/data/" />
+	
+	<resources mapping="/include/**" location="/WEB-INF/views/include" />
+	<resources mapping="/intro/**" location="/WEB-INF/views/intro" />
+	<resources mapping="/board/**" location="/WEB-INF/views/board" />
+	<resources mapping="/qna/**" location="/WEB-INF/views/qna" />
+	<resources mapping="/free/**" location="/WEB-INF/views/free" />
+	<resources mapping="/databank/**" location="/WEB-INF/views/databank" />
+	<resources mapping="/member/**" location="/WEB-INF/views/member" />
+	<resources mapping="/product/**" location="/WEB-INF/views/product" />
+	<resources mapping="/util/**" location="/WEB-INF/views/util" />
+	<resources mapping="/sales/**" location="/WEB-INF/views/sales" />
+	<resources mapping="/admin/**" location="/WEB-INF/views/admin" />
+	<resources mapping="/delivery/**" location="/WEB-INF/views/delivery" />
+	<resources mapping="/resources/**" location="/WEB-INF/views/resources" />
+
+	<!-- 리졸버에 대한 접두사와 접미사 설정 -->
+	<!-- @Controller가 렌더링하기 위해 선택한 뷰를 /WEB-INF/views 디렉터리의 .jsp 리소스로 확인합니다. -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+	<!-- 멀티파트 리졸버 설정 -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <beans:property name="defaultEncoding" value="UTF-8"/> <!-- 기본 인코딩 -->
+        <beans:property name="maxUploadSize" value="52428800"/> <!-- 파일 사이즈 : 50MB -->
+        <beans:property name="maxInMemorySize" value="1048576"/> <!-- 메모리 사이즈 : 1MB -->
+	</beans:bean>
+	
+	<!-- 멀티파트 업로드 디렉토리 지정 -->
+	<beans:bean id="uploadPath" class="java.lang.String">
+		<beans:constructor-arg value="D:\kim\pro03\pro03\src\main\webapp\resources\upload"></beans:constructor-arg>
+	</beans:bean>
+			
+	<!-- 기본 메인 패키지 및 컨트롤러 패키지 설정 -->
+	<context:component-scan base-package="com.morning" />
+	
+	<!-- 스프링시크리티 관리자 인터셉터 설정 -->
+	<beans:bean id="adminInterceptor" class="com.morning.filter.AdminInterceptor" />
+	<interceptors>
+		<interceptor>
+			<mapping path="/admin/**" />
+			<beans:ref bean="adminInterceptor" />
+		</interceptor>
+	</interceptors>
+	
+    <!-- Spring Security 설정 -->
+    <security:http auto-config="true" use-expressions="true">
+        <security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
+        <security:intercept-url pattern="/sales/**" access="permitAll" />
+        <!-- <security:intercept-url pattern="/sales/**" access="isAuthenticated()" /> -->
+        <security:intercept-url pattern="/**" access="permitAll" />
+
+        <security:form-login login-page="/member/login.do"
+                             default-target-url="/home"
+                             authentication-failure-url="/member/login.do?error=true"
+                             username-parameter="username"
+                             password-parameter="password" />
+
+        <security:logout logout-url="/member/logout.do" logout-success-url="/member/login.do" />
+
+        <security:csrf />
+    </security:http>
+
+    <security:authentication-manager>
+        <security:authentication-provider>
+            <security:password-encoder ref="bcryptPasswordEncoder"/>
+            <security:user-service>
+                <security:user name="admin" password="{bcrypt}admin_password_hash" authorities="ROLE_ADMIN" />
+                <security:user name="user" password="{bcrypt}user_password_hash" authorities="ROLE_USER" />
+            </security:user-service>
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+    <beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+	
+</beans:beans>

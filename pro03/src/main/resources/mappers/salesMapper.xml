@@ -41,14 +41,14 @@
 	
 	<!-- 구매 처리 -->
 	<insert id="insSales" parameterType="com.morning.domain.Sales">
-		insert into sales values (default, #{product.pno}, #{amount}, #{tot},
-		#{member.id}, #{paymethod}, #{paynum}, #{addr}, #{tel}, 
-		#{delcom}, #{deltel}, #{delno}, #{delstatus}, #{st}, default)
+		insert into sales values (default, #{pno}, #{amount}, #{tot},
+		#{id}, #{paymethod}, #{paynum}, #{addr}, #{tel}, 
+		#{delcom}, #{deltel}, #{delno}, #{delstatus}, #{st}, default, #{gtid}, #{rname})
 	</insert>
 	
 	<!-- 배송지 변경 -->
 	<update id="upSales" parameterType="com.morning.domain.Sales">
-		update sales set addr=#{addr}, tel=#{tel} where sno=#{sno}
+		update sales set rname=#{rname}, addr=#{addr}, tel=#{tel} where sno=#{sno}
 	</update>
 	
 	<!-- 배송처리 -->

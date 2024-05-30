@@ -1,0 +1,20 @@
+package com.morning.domain;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
+public class IamPortClient {
+	public final static String CODE = "";
+	public final static String KEY = "";
+	public final static String SECRET = "";
+
+	private String randChar;
+
+	public IamPortClient() {
+		this.randChar = RandomStringUtils
+	}
+}

@@ -1,0 +1,7 @@
+package com.morning.domain;
+
+public class IamPortClient {
+	private final static String CODE = "";
+	private final static String KEY = "";
+	private final static String SECRET = "";
+}
