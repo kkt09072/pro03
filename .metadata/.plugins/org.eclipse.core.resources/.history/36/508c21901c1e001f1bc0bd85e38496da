@@ -59,7 +59,10 @@ public class AdminController {
 		
 	@Autowired
 	private BoardBiz boardService;
-		
+	
+	@Autowired
+	private FreeBiz freeService;
+	
 	@Autowired
 	private MemberService memberService;
 	

@@ -59,7 +59,10 @@ public class AdminController {
 		
 	@Autowired
 	private BoardBiz boardService;
-		
+	
+	@Autowired
+	private FreeBiz freeService;
+	
 	@Autowired
 	private MemberService memberService;
 	
@@ -412,6 +415,7 @@ public class AdminController {
 		productService.delProduct(pno);
 		return "redirect:/product/list.do?cate="+cate;
 	}
+	
 	
 	
 	@RequestMapping("productReturn.do")
