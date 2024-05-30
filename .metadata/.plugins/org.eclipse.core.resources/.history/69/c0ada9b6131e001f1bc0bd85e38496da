@@ -1,0 +1,72 @@
+package com.morning.biz;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.morning.domain.Sales;
+import com.morning.per.SalesMapper;
+
+@Service
+public class SalesService implements SalesBiz {
+
+	@Autowired
+	private SalesMapper salesDAO;
+	
+	@Override
+	public int getTotalCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<Sales> getAllSalesList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Sales> getSalesList(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Sales getSales(int sno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insSales(Sales sales) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void upSales(Sales sales) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void upDelivery(Sales sales) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void completeDelivery(Sales sales) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delSales(int sno) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+}

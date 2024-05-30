@@ -1,0 +1,5 @@
+package com.morning.filter;
+
+public class BadWordFilter {
+
+}

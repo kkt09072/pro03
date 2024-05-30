@@ -1,0 +1,67 @@
+package com.morning.per;
+
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.morning.domain.Sales;
+
+@Repository
+public class SalesDAO implements SalesMapper {
+
+	@Autowired
+	private SqlSession sqlSession;
+	
+	
+	@Override
+	public int getTotalCount() {
+		return sqlSession.selectOne("sales.getTotalCount");
+	}
+
+	@Override
+	public List<Sales> getAllSalesList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Sales> getSalesList(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Sales getSales(int sno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insSales(Sales sales) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void upSales(Sales sales) {
+		// TODO Auto-generated method stub		
+	}
+
+	@Override
+	public void upDelivery(Sales sales) {
+		// TODO Auto-generated method stub		
+	}
+
+	@Override
+	public void completeDelivery(Sales sales) {
+		// TODO Auto-generated method stub		
+	}
+
+	@Override
+	public void delSales(int sno) {
+		// TODO Auto-generated method stub
+	}
+
+	
+}

@@ -1,0 +1,17 @@
+package com.morning.per;
+
+import java.util.List;
+
+import com.morning.domain.Sales;
+
+public interface SalesMapper {
+	int getTotalCount();
+	List<Sales> getAllSalesList();
+	List<Sales> getSalesList(String id);
+	Sales getSales(int sno);
+	void insSales(Sales sales);
+	void upSales(Sales sales);
+	void upDelivery(Sales sales);
+	void completeDelivery(Sales sales);
+	void delSales(int sno);
+}

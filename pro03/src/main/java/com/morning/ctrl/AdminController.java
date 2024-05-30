@@ -32,6 +32,7 @@ import com.morning.biz.FreeBiz;
 import com.morning.biz.InventoryBiz;
 import com.morning.biz.MemberService;
 import com.morning.biz.ProductBiz;
+import com.morning.biz.SalesBiz;
 import com.morning.domain.Board;
 import com.morning.domain.CategoryVO;
 import com.morning.domain.Fileboard;
@@ -39,6 +40,7 @@ import com.morning.domain.Inventory;
 import com.morning.domain.Member;
 import com.morning.domain.Product;
 import com.morning.domain.ProductVO;
+import com.morning.domain.Sales;
 
 @Controller
 @RequestMapping("/admin/")
@@ -72,6 +74,9 @@ public class AdminController {
 	
 	@Autowired
 	private InventoryBiz inventoryService;
+	
+	@Autowired
+	private SalesBiz salesService;
 	
 	String uploadLoc = "/resources/upload/";
 	
@@ -486,5 +491,50 @@ public class AdminController {
 	    out.print(jsonString);
 	    out.flush();
 	}	
+	
+	//관리자 판매 전체 목록
+	@GetMapping("allSalesList.do")
+	public String getAllSalesList(Model model) {
+		model.addAttribute("list",salesService.getAllSalesList());
+		return "admin/sales/list";
+	}
+	
+	//관리자 상품별 판매 목록
+	@GetMapping("pnoSalesList.do")
+	public String getPnoSalesList(@RequestParam("pno") int pno, Model model) {
+		model.addAttribute("list", salesService.getPnoSalesList(pno));
+		return "admin/sales/list";
+	}
+	
+	//관리자 회원별 판매 전체 목록
+	@GetMapping("memberSalesList.do")
+	public String getSalesList(@RequestParam("id") String id, Model model) {
+		model.addAttribute("list", salesService.getSalesList(id));
+		return "admin/sales/list";
+	}
+	
+	//관리자 판매 진행 상태별 목록
+	@GetMapping("stSalesList.do")
+	public String getStList(@RequestParam("st") String st, Model model) {
+		model.addAttribute("list", salesService.getStSalesList(st));
+		return "admin/sales/list";
+	}
+
+	//고객별 구매 목록
+	@GetMapping("delStatusSalesList.do")
+	public String getDelStatusSalesList(@RequestParam("delStatus") String delStatus, Model model) {
+		model.addAttribute("list", salesService.getDelstSalesList(delStatus));
+		return "admin/sales/list";
+	}
+	
+	//특정 판매 건수 조회
+	@GetMapping("sales.do")
+	public String getSales(@RequestParam("sno") int sno, Model model) {
+		model.addAttribute("dto", salesService.getSales(sno));
+		return "admin/sales/get";
+	}
+
+	
+	
 	
 }

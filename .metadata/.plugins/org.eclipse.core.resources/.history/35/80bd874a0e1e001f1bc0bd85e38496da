@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sales">
+
+	<!-- 총 거래수 -->
+	<select id="getTotalCount" resultType="int">
+		select COUNT(*) from sales
+	</select>
+
+	<!-- 관리자 판매 전체 목록 -->
+	<select id="getAllSalesList" resultMap="salesRM">
+		select s.no, p.pno, s.amount, s.tot, m.id, s.paymethod, s.paynum, 
+		s.addr, s.tel, s.delcom, s.deltel, s.delno, s.delstatus, s.resdate 
+		from sales s, product p, member m where s.pno=p.pno and s.id=m.id 
+		order by resdate desc
+	</select>	
+
+	<!-- 고객별 구매 목록 -->
+	<select id="getSalesList" resultMap="salesRM">
+		select s.no, p.pno, s.amount, s.tot, m.id, s.paymethod, s.paynum, 
+		s.addr, s.tel, s.delcom, s.deltel, s.delno, s.delstatus, s.resdate 
+		from sales s, product p, member m where s.pno=p.pno and s.id=m.id and id=#{member.id}  
+		order by resdate desc
+	</select>	
+	
+	<!-- 해당 구매 건별 구매 상세 내역 -->
+	<select id="getSales" resultMap="salesRM">
+		select s.no, p.pno, s.amount, s.tot, m.id, s.paymethod, s.paynum,  
+		s.addr, s.tel, s.delcom, s.deltel, s.delno, s.delstatus, s.resdate 
+		from sales s, product p, member m where s.pno=p.pno and s.id=m.id and sno=#{sno}
+	</select>
+	
+	<!-- 구매 처리 -->
+	<insert id="insSales" parameterType="com.morning.domain.Sales">
+		insert into sales values (default, #{product.pno}, #{amount}, #{tot},
+		#{member.id}, #{paymethod}, #{paynum}, #{addr}, #{tel}, 
+		#{delcom}, #{deltel}, #{delno}, #{delstatus}, #{st}, default)
+	</insert>
+	
+	<!-- 배송지 변경 -->
+	<update id="upSales" parameterType="com.morning.domain.Sales">
+		update sales set addr=#{addr}, tel=#{tel} where sno=#{sno}
+	</update>
+	
+	<!-- 배송처리 -->
+	<update id="upDelivery" parameterType="com.morning.domain.Sales">
+		update sales set delcom=#{delcom}, deltel=#{deltel}, delstatus=#{delstatus}, st=#{st} where sno=#{sno}
+	</update>
+	
+	<!-- 반품 처리 -->
+	<delete id="delSales">
+		delete from sales where sno=#{sno}
+	</delete>
+
+</mapper>
