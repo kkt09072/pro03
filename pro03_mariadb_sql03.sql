@@ -78,3 +78,4 @@ select * from inventoryvo where pno=1;
 
 select * from sales;
 
+

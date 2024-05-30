@@ -40,17 +40,82 @@
 						<table class="table">
 							<tbody>
 								<tr>
-									<th><label for="title">제목</label></th>
+									<th><h3>제품 정보</h3></th>
 									<td>
-										<input type="text" name="title" id="title" class="input" maxlength="100" required>
+										<div class="item_fr">
+											<input type="hidden" name="pno" id="pno" value="${product.pno }" />
+											<input type="hidden" name="id" id="id" value="${cus.id }" />
+											<h4>제품명 : ${product.pname }</h4>
+											<img src="${path2 }/resources/upload/${product.img }" alt="${product.pname }" width="120" />
+											<br>
+											<h4>제품 설명</h4>
+											<p>${product.com }</p>
+										</div>
 									</td>
 								</tr>
 								<tr>
-									<th><label for="content">내용</label></th>
+									<th><h3>구매 정보</h3></th>
 									<td>
-										<textarea name="content" id="content" rows="8" cols="80" class="textarea"></textarea>
+										<div class="item_fr">
+											<strong>단가 </strong> : 
+												<input type="number" id="price" value="${inventory.oprice }" class="input" readonly />
+											<strong>수량 </strong> : 
+											<c:if test="${inventory.amount gt 0}">
+												<input type="number" name="amount" id="amount" min="1" max="${inventory.amount }" step="1" class="input" />
+											</c:if>
+											<c:if test="${(inventory.amount eq 0) or (inventory.amount lt 1)}">
+												<strong style="color:red">품절</strong>
+											</c:if>
+											<br>
+										</div>
 									</td>
 								</tr>
+								<c:if test="${inventory.amount gt 0}">
+								<tr class="change_item">
+									<th><h3>결제 정보</h3></th>
+									<td>
+										<div class="item_fr">
+											<strong>결제할 금액</strong> : 
+											<input type="number" name="tot" id="tot" class="input"/>											
+										</div>
+										<div class="item_fr">
+											<strong>결제 방법</strong> : 
+											<select name="paymethod" id="paymethod" class="input">
+												<option value="">선택안함</option>
+												<option value="bank">계좌이체</option>
+												<option value="card">카드</option>
+											</select>
+										</div>
+										<div class="item_fr">
+											<strong>결제 번호</strong> : 
+											<input type="text" name="paynum" id="paynum" class="input"/>
+										</div>
+										<button type="button" class="button is-danger">결제</button>
+									</td>
+								</tr>
+								</c:if>
+								<c:if test="${inventory.amount gt 0}">
+								<tr class="result_item">
+									<th><h3>배송 정보</h3></th>
+									<td>
+										<div class="item_fr">
+											<strong>주문자</strong> :
+											<strong>${sname }</strong> 											
+										</div>
+										<div class="item_fr">
+											<strong>배송지</strong> :
+											<input type="text" name="addr1" id="addr1" class="input" required><br> 
+											<input type="text" name="addr2" id="addr2" class="input" required>
+											<input type="text" name="postcode" id="postcode" class="input" required>
+											<input type="hidden" name="addr" id="addr" />											
+										</div>
+										<div class="item_fr">
+											<strong>연락처</strong> :
+											<input type="tel" name="tel" id="tel" class="input"><br> 
+										</div>
+									</td>
+								</tr>
+								</c:if>
 							</tbody>
 						</table>
 						<hr>
@@ -59,12 +124,14 @@
 						  <a href="${path2 }/product/detail.do?pno=${product.pno }" class="button is-primary">해당 상품</a>
 						</div>
 					</form>
+					<!-- 주소 API -->
 					<script>
-					$(function(){
-						CKEDITOR.replace('content', {
-							filebrowserUploadUrl : '${path2}/free/fileupload.do'
-						});
-					});
+					
+					</script>
+					
+					<!-- 결제 API -->
+					<script>
+					
 					</script>
 				</div>
     		</div>
