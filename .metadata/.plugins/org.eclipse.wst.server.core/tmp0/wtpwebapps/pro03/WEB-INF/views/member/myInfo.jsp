@@ -86,6 +86,9 @@
 		                    </tr>
 	                    </tbody>
 	                </table>
+	            	<div class="buttons">
+	            		<a href="${path2 }/sales/salesList.do" class="button is-info">구매 내역</a>
+	            	</div>
 	            </div>
 	        </div>    
         </section>

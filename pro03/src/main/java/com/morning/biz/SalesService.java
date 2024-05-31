@@ -24,6 +24,8 @@ public class SalesService implements SalesBiz {
 		return salesDAO.getAllSalesList();
 	}
 	
+	
+	
 	@Override
 	public List<Sales> getStSalesList(String st) {
 		return salesDAO.getStSalesList(st);
